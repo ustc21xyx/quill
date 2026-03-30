@@ -4,7 +4,42 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
+    <!-- Quill feather pen - elegant, centered in safe zone (24-84) -->
+    <!-- Main feather body -->
+    <path
+        android:fillColor="#5D5F5A"
+        android:pathData="M68,28 Q72,32 74,38 L76,44 Q77,50 75,56 L70,66 Q67,72 62,76 L58,78 Q56,79 55,78 L54,76 Q53,74 54,72 L58,64 Q62,56 64,48 L65,42 Q65,38 63,34 L62,32 Q63,29 66,28 Z"/>
+
+    <!-- Feather spine/rachis -->
+    <path
+        android:strokeColor="#2F342D"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M66,30 Q64,40 62,50 Q58,62 54,74"/>
+
+    <!-- Left barbs -->
+    <path
+        android:strokeColor="#787C73"
+        android:strokeWidth="0.8"
+        android:fillColor="#00000000"
+        android:pathData="M63,36 Q58,38 52,37 M62,42 Q56,44 49,43 M60,48 Q54,50 47,49 M58,54 Q52,56 46,55 M56,60 Q50,62 45,61"/>
+
+    <!-- Right barbs -->
+    <path
+        android:strokeColor="#787C73"
+        android:strokeWidth="0.8"
+        android:fillColor="#00000000"
+        android:pathData="M67,36 Q71,37 74,36 M66,42 Q70,43 73,42 M64,48 Q68,49 72,48 M62,54 Q66,55 70,54"/>
+
+    <!-- Nib/tip -->
     <path
         android:fillColor="#2F342D"
-        android:pathData="M54,30 L54,78 M46,36 Q54,28 62,36 M42,42 Q54,32 66,42"/>
+        android:pathData="M54,74 L52,80 Q51,82 53,81 L55,78 Z"/>
+
+    <!-- Small ink dot -->
+    <path
+        android:fillColor="#5D5F5A"
+        android:pathData="M50,82 A1.5,1.5 0 1,1 53,82 A1.5,1.5 0 1,1 50,82"/>
+
 </vector>
