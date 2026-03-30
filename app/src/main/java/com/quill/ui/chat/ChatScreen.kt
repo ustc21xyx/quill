@@ -33,7 +33,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -61,21 +60,9 @@ fun ChatScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
 
-    // Auto-scroll to bottom only when near bottom or new message arrives
-    val isNearBottom = remember {
-        derivedStateOf {
-            val lastVisible = listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
-            val totalItems = listState.layoutInfo.totalItemsCount
-            totalItems == 0 || lastVisible >= totalItems - 3
-        }
-    }
+    // Auto-scroll only when a new message is added (not during streaming content updates)
     LaunchedEffect(state.messages.size) {
         if (state.messages.isNotEmpty()) {
-            listState.animateScrollToItem(state.messages.size - 1)
-        }
-    }
-    LaunchedEffect(state.messages.lastOrNull()?.content) {
-        if (state.messages.isNotEmpty() && isNearBottom.value) {
             listState.animateScrollToItem(state.messages.size - 1)
         }
     }
@@ -146,8 +133,7 @@ fun ChatScreen(
                 onTextChange = viewModel::updateInput,
                 onSend = viewModel::sendMessage,
                 isStreaming = state.isStreaming,
-                modifier = Modifier
-                    .navigationBarsPadding(),
+                modifier = Modifier,
             )
         }
 

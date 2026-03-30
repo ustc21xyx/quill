@@ -11,6 +11,7 @@ data class ChatUiState(
     val availableModels: List<ModelConfig> = emptyList(),
     val error: String? = null,
     val conversationTitle: String = "New Chat",
+    val editingMessageId: String? = null,
 )
 
 data class ChatMessageUi(

@@ -103,11 +103,25 @@ class ChatViewModel @Inject constructor(
         val model = _state.value.selectedModel
         if (text.isEmpty() || model == null) return
 
-        // Clear input immediately for responsiveness
-        _state.update { it.copy(inputText = "", error = null) }
+        val editingId = _state.value.editingMessageId
+
+        // Clear input and editing state immediately
+        _state.update { it.copy(inputText = "", error = null, editingMessageId = null) }
 
         viewModelScope.launch {
             val convId = ensureConversation()
+
+            // If editing, remove the edited message and everything after it
+            if (editingId != null) {
+                val messages = _state.value.messages
+                val editIndex = messages.indexOfFirst { it.id == editingId }
+                if (editIndex >= 0) {
+                    _state.update { state ->
+                        state.copy(messages = messages.take(editIndex).toList())
+                    }
+                }
+                conversationRepository.deleteMessagesFrom(convId, editingId)
+            }
 
             val userMessage = ChatMessage(
                 id = UUID.randomUUID().toString(),
@@ -164,18 +178,11 @@ class ChatViewModel @Inject constructor(
         if (index < 0) return
 
         val messageToEdit = messages[index]
-        val remainingMessages = messages.take(index).toList()
         _state.update { state ->
             state.copy(
                 inputText = messageToEdit.content,
-                messages = remainingMessages,
+                editingMessageId = messageId,
             )
-        }
-
-        viewModelScope.launch {
-            if (conversationId.isNotEmpty()) {
-                conversationRepository.deleteMessagesFrom(conversationId, messageId)
-            }
         }
     }
 
