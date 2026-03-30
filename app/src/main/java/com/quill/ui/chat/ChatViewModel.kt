@@ -220,6 +220,7 @@ class ChatViewModel @Inject constructor(
                 }
                 return@launch
             }
+            var finalized = false
             chatRepository.streamCompletion(messagesWithSystem, model, provider).collect { event ->
                 when (event) {
                     is StreamEvent.ContentDelta -> {
@@ -231,7 +232,10 @@ class ChatViewModel @Inject constructor(
                         updateStreamingMessage(assistantId)
                     }
                     is StreamEvent.Done -> {
-                        finalizeMessage(assistantId)
+                        if (!finalized) {
+                            finalized = true
+                            finalizeMessage(assistantId)
+                        }
                     }
                     is StreamEvent.Error -> {
                         _state.update {
@@ -243,6 +247,10 @@ class ChatViewModel @Inject constructor(
                         }
                     }
                 }
+            }
+            // Safety net: if stream ended without Done event, finalize anyway
+            if (!finalized && _state.value.isStreaming) {
+                finalizeMessage(assistantId)
             }
         }
     }
