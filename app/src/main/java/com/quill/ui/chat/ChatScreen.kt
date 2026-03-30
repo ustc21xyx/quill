@@ -61,7 +61,7 @@ fun ChatScreen(
     }
 
     Box(modifier = modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().imePadding()) {
             // Top bar
             ChatTopBar(
                 title = state.conversationTitle,
@@ -114,7 +114,7 @@ fun ChatScreen(
                     }
                 }
 
-                item { Spacer(Modifier.height(80.dp)) }
+                item { Spacer(Modifier.height(8.dp)) }
             }
 
             // Input bar - always visible and ready
@@ -124,8 +124,7 @@ fun ChatScreen(
                 onSend = viewModel::sendMessage,
                 isStreaming = state.isStreaming,
                 modifier = Modifier
-                    .navigationBarsPadding()
-                    .imePadding(),
+                    .navigationBarsPadding(),
             )
         }
 
