@@ -28,8 +28,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.quill.R
 import com.quill.ui.theme.ButtonShape
 
 @Composable
@@ -52,7 +54,7 @@ fun ProviderEditScreen(
     ) {
         TextButton(onClick = onBack) {
             Text(
-                text = "< BACK",
+                text = stringResource(R.string.back),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outline,
             )
@@ -61,13 +63,13 @@ fun ProviderEditScreen(
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = if (state.isNew) "Add Provider" else "Edit Provider",
+            text = if (state.isNew) stringResource(R.string.prov_edit_add_title) else stringResource(R.string.prov_edit_edit_title),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Connect to any OpenAI-compatible API. Models will be fetched automatically.",
+            text = stringResource(R.string.prov_edit_subtitle),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -77,8 +79,8 @@ fun ProviderEditScreen(
         ProviderTextField(
             value = state.displayName,
             onValueChange = viewModel::updateDisplayName,
-            label = "DISPLAY NAME",
-            placeholder = "e.g. OpenAI, Anthropic, Local LLM",
+            label = stringResource(R.string.prov_edit_name),
+            placeholder = stringResource(R.string.prov_edit_name_hint),
         )
 
         Spacer(Modifier.height(20.dp))
@@ -86,8 +88,8 @@ fun ProviderEditScreen(
         ProviderTextField(
             value = state.baseUrl,
             onValueChange = viewModel::updateBaseUrl,
-            label = "BASE URL",
-            placeholder = "e.g. https://api.openai.com",
+            label = stringResource(R.string.prov_edit_url),
+            placeholder = stringResource(R.string.prov_edit_url_hint),
             keyboardType = KeyboardType.Uri,
         )
 
@@ -96,8 +98,8 @@ fun ProviderEditScreen(
         ProviderTextField(
             value = state.apiKey,
             onValueChange = viewModel::updateApiKey,
-            label = "API KEY",
-            placeholder = "sk-...",
+            label = stringResource(R.string.prov_edit_key),
+            placeholder = stringResource(R.string.prov_edit_key_hint),
             isPassword = true,
         )
 
@@ -117,7 +119,7 @@ fun ProviderEditScreen(
                     )
                     Spacer(Modifier.width(8.dp))
                 }
-                Text("Test & Fetch Models", style = MaterialTheme.typography.labelLarge)
+                Text(stringResource(R.string.prov_edit_test), style = MaterialTheme.typography.labelLarge)
             }
         }
 
@@ -168,7 +170,7 @@ fun ProviderEditScreen(
             ),
         ) {
             Text(
-                text = if (state.isNew) "Save & Fetch Models" else "Save",
+                text = if (state.isNew) stringResource(R.string.prov_edit_save_fetch) else stringResource(R.string.prov_edit_save),
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.padding(vertical = 4.dp),
             )

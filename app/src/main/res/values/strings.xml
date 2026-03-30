@@ -1,3 +1,121 @@
 <resources>
     <string name="app_name">Quill</string>
+
+    <!-- Navigation -->
+    <string name="nav_chat">Chat</string>
+    <string name="nav_api">API</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Chat -->
+    <string name="chat_placeholder">Start typing…</string>
+    <string name="chat_composing">COMPOSING…</string>
+    <string name="chat_quill">QUILL</string>
+    <string name="chat_you">YOU</string>
+    <string name="chat_model">MODEL</string>
+    <string name="chat_copy">COPY</string>
+    <string name="chat_regenerate">REGENERATE</string>
+    <string name="chat_dismiss">DISMISS</string>
+
+    <!-- Thinking -->
+    <string name="thinking_label">THINKING…</string>
+    <string name="thinking_reasoning">REASONING</string>
+    <string name="thinking_collapse">COLLAPSE</string>
+    <string name="thinking_expand">EXPAND</string>
+
+    <!-- Conversations -->
+    <string name="conv_history">HISTORY</string>
+    <string name="conv_title">Conversations</string>
+    <string name="conv_empty">No conversations yet</string>
+    <string name="conv_empty_hint">Start a new chat from the Chat tab</string>
+    <string name="conv_new_chat">+ New Chat</string>
+    <string name="conv_delete">DELETE</string>
+    <string name="conv_del">DEL</string>
+
+    <!-- Providers -->
+    <string name="prov_header">API CONNECTIONS</string>
+    <string name="prov_title">Providers</string>
+    <string name="prov_subtitle">Add API providers to auto-fetch available models.</string>
+    <string name="prov_add">Add Provider</string>
+    <string name="prov_view_models">View Models</string>
+    <string name="prov_empty">No providers configured</string>
+    <string name="prov_empty_hint">Add your first API provider to begin</string>
+    <string name="prov_endpoint">ENDPOINT</string>
+    <string name="prov_api_key">API KEY</string>
+    <string name="prov_refresh">REFRESH MODELS</string>
+    <string name="prov_edit">EDIT</string>
+    <string name="prov_delete">DELETE</string>
+
+    <!-- Provider Edit -->
+    <string name="prov_edit_add_title">Add Provider</string>
+    <string name="prov_edit_edit_title">Edit Provider</string>
+    <string name="prov_edit_subtitle">Connect to any OpenAI-compatible API. Models will be fetched automatically.</string>
+    <string name="prov_edit_name">DISPLAY NAME</string>
+    <string name="prov_edit_name_hint">e.g. OpenAI, Anthropic, Local LLM</string>
+    <string name="prov_edit_url">BASE URL</string>
+    <string name="prov_edit_url_hint">e.g. https://api.openai.com</string>
+    <string name="prov_edit_key">API KEY</string>
+    <string name="prov_edit_key_hint">sk-…</string>
+    <string name="prov_edit_test">Test &amp; Fetch Models</string>
+    <string name="prov_edit_save_fetch">Save &amp; Fetch Models</string>
+    <string name="prov_edit_save">Save</string>
+    <string name="back">← BACK</string>
+
+    <!-- Models -->
+    <string name="model_header">CONFIGURATION INDEX</string>
+    <string name="model_title">Model Registry</string>
+    <string name="model_subtitle">Manage your AI model configurations. Add API endpoints and keys to start chatting.</string>
+    <string name="model_register">Register New Model</string>
+    <string name="model_empty">No models configured</string>
+    <string name="model_empty_hint">Add your first model to begin</string>
+    <string name="model_default">DEFAULT</string>
+    <string name="model_provider">PROVIDER</string>
+    <string name="model_id">MODEL ID</string>
+    <string name="model_set_default">SET DEFAULT</string>
+    <string name="model_edit">EDIT</string>
+    <string name="model_delete">DELETE</string>
+
+    <!-- Model Edit -->
+    <string name="model_edit_add_title">Register Model</string>
+    <string name="model_edit_edit_title">Edit Model</string>
+    <string name="model_edit_provider">PROVIDER</string>
+    <string name="model_edit_provider_hint">Select a provider</string>
+    <string name="model_edit_name">DISPLAY NAME</string>
+    <string name="model_edit_name_hint">e.g. Claude Sonnet</string>
+    <string name="model_edit_id">MODEL ID</string>
+    <string name="model_edit_id_hint">e.g. gpt-4o, claude-sonnet-4-20250514</string>
+    <string name="model_edit_temp">TEMPERATURE</string>
+    <string name="model_edit_max_tokens">MAX TOKENS</string>
+    <string name="model_edit_max_tokens_hint">4096</string>
+    <string name="model_edit_test">Test Connection</string>
+    <string name="model_edit_connected">Connected</string>
+    <string name="model_edit_no_provider">No providers configured. Add a provider first.</string>
+    <string name="model_edit_register">Register</string>
+    <string name="model_edit_save">Save</string>
+
+    <!-- Settings -->
+    <string name="settings_header">CONFIGURATION</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_default_model">DEFAULT MODEL</string>
+    <string name="settings_not_configured">Not configured</string>
+    <string name="settings_context">CONTEXT MESSAGES</string>
+    <string name="settings_context_hint">Number of history messages sent to the API</string>
+    <string name="settings_personas">PERSONAS</string>
+    <string name="settings_personas_hint">AI personalities with custom system prompts</string>
+    <string name="settings_new_persona">+ New Persona</string>
+    <string name="settings_no_personas">No personas yet. Create one to customize your AI.</string>
+    <string name="settings_about">ABOUT</string>
+    <string name="settings_version">Version %1$s</string>
+
+    <!-- Persona Edit -->
+    <string name="persona_add_title">Create Persona</string>
+    <string name="persona_edit_title">Edit Persona</string>
+    <string name="persona_subtitle">Give your AI a personality. The system prompt is sent at the start of every conversation.</string>
+    <string name="persona_name">NAME</string>
+    <string name="persona_name_hint">e.g. Code Assistant, Creative Writer</string>
+    <string name="persona_desc">DESCRIPTION (optional)</string>
+    <string name="persona_desc_hint">Brief description of this persona</string>
+    <string name="persona_prompt">SYSTEM PROMPT</string>
+    <string name="persona_prompt_hint">You are a helpful assistant that…</string>
+    <string name="persona_create">Create</string>
+    <string name="persona_save">Save</string>
 </resources>

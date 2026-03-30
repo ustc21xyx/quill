@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">Quill</string>
+
+    <!-- Navigation -->
+    <string name="nav_chat">聊天</string>
+    <string name="nav_api">接口</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- Chat -->
+    <string name="chat_placeholder">输入消息…</string>
+    <string name="chat_composing">生成中…</string>
+    <string name="chat_quill">QUILL</string>
+    <string name="chat_you">我</string>
+    <string name="chat_model">模型</string>
+    <string name="chat_copy">复制</string>
+    <string name="chat_regenerate">重新生成</string>
+    <string name="chat_dismiss">关闭</string>
+
+    <!-- Thinking -->
+    <string name="thinking_label">思考中…</string>
+    <string name="thinking_reasoning">推理过程</string>
+    <string name="thinking_collapse">收起</string>
+    <string name="thinking_expand">展开</string>
+
+    <!-- Conversations -->
+    <string name="conv_history">历史记录</string>
+    <string name="conv_title">对话列表</string>
+    <string name="conv_empty">暂无对话</string>
+    <string name="conv_empty_hint">从聊天页面开始新对话</string>
+    <string name="conv_new_chat">+ 新对话</string>
+    <string name="conv_delete">删除</string>
+    <string name="conv_del">删除</string>
+
+    <!-- Providers -->
+    <string name="prov_header">接口连接</string>
+    <string name="prov_title">服务商</string>
+    <string name="prov_subtitle">添加 API 服务商以自动获取可用模型。</string>
+    <string name="prov_add">添加服务商</string>
+    <string name="prov_view_models">查看模型</string>
+    <string name="prov_empty">未配置服务商</string>
+    <string name="prov_empty_hint">添加你的第一个 API 服务商</string>
+    <string name="prov_endpoint">接口地址</string>
+    <string name="prov_api_key">API 密钥</string>
+    <string name="prov_refresh">刷新模型</string>
+    <string name="prov_edit">编辑</string>
+    <string name="prov_delete">删除</string>
+
+    <!-- Provider Edit -->
+    <string name="prov_edit_add_title">添加服务商</string>
+    <string name="prov_edit_edit_title">编辑服务商</string>
+    <string name="prov_edit_subtitle">连接任何 OpenAI 兼容的 API，模型将自动获取。</string>
+    <string name="prov_edit_name">显示名称</string>
+    <string name="prov_edit_name_hint">例如 OpenAI、DeepSeek</string>
+    <string name="prov_edit_url">接口地址</string>
+    <string name="prov_edit_url_hint">例如 https://api.openai.com</string>
+    <string name="prov_edit_key">API 密钥</string>
+    <string name="prov_edit_key_hint">sk-…</string>
+    <string name="prov_edit_test">测试并获取模型</string>
+    <string name="prov_edit_save_fetch">保存并获取模型</string>
+    <string name="prov_edit_save">保存</string>
+    <string name="back">← 返回</string>
+
+    <!-- Models -->
+    <string name="model_header">模型配置</string>
+    <string name="model_title">模型注册</string>
+    <string name="model_subtitle">管理你的 AI 模型配置，添加 API 接口和密钥以开始聊天。</string>
+    <string name="model_register">注册新模型</string>
+    <string name="model_empty">未配置模型</string>
+    <string name="model_empty_hint">添加你的第一个模型</string>
+    <string name="model_default">默认</string>
+    <string name="model_provider">服务商</string>
+    <string name="model_id">模型 ID</string>
+    <string name="model_set_default">设为默认</string>
+    <string name="model_edit">编辑</string>
+    <string name="model_delete">删除</string>
+
+    <!-- Model Edit -->
+    <string name="model_edit_add_title">注册模型</string>
+    <string name="model_edit_edit_title">编辑模型</string>
+    <string name="model_edit_provider">服务商</string>
+    <string name="model_edit_provider_hint">选择服务商</string>
+    <string name="model_edit_name">显示名称</string>
+    <string name="model_edit_name_hint">例如 Claude Sonnet</string>
+    <string name="model_edit_id">模型 ID</string>
+    <string name="model_edit_id_hint">例如 gpt-4o、deepseek-chat</string>
+    <string name="model_edit_temp">温度</string>
+    <string name="model_edit_max_tokens">最大 Token 数</string>
+    <string name="model_edit_max_tokens_hint">4096</string>
+    <string name="model_edit_test">测试连接</string>
+    <string name="model_edit_connected">已连接</string>
+    <string name="model_edit_no_provider">未配置服务商，请先添加服务商。</string>
+    <string name="model_edit_register">注册</string>
+    <string name="model_edit_save">保存</string>
+
+    <!-- Settings -->
+    <string name="settings_header">配置</string>
+    <string name="settings_title">设置</string>
+    <string name="settings_default_model">默认模型</string>
+    <string name="settings_not_configured">未配置</string>
+    <string name="settings_context">上下文消息数</string>
+    <string name="settings_context_hint">发送给 API 的历史消息数量</string>
+    <string name="settings_personas">人设</string>
+    <string name="settings_personas_hint">带自定义系统提示词的 AI 人格</string>
+    <string name="settings_new_persona">+ 新建人设</string>
+    <string name="settings_no_personas">暂无人设，创建一个来自定义你的 AI。</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_version">版本 %1$s</string>
+
+    <!-- Persona Edit -->
+    <string name="persona_add_title">创建人设</string>
+    <string name="persona_edit_title">编辑人设</string>
+    <string name="persona_subtitle">赋予 AI 个性。系统提示词会在每次对话开始时发送。</string>
+    <string name="persona_name">名称</string>
+    <string name="persona_name_hint">例如 代码助手、创意写手</string>
+    <string name="persona_desc">描述（可选）</string>
+    <string name="persona_desc_hint">简要描述这个人设</string>
+    <string name="persona_prompt">系统提示词</string>
+    <string name="persona_prompt_hint">你是一个有帮助的助手…</string>
+    <string name="persona_create">创建</string>
+    <string name="persona_save">保存</string>
+</resources>

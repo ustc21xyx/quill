@@ -22,11 +22,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.quill.R
 import com.quill.domain.model.Conversation
 import com.quill.ui.conversations.ConversationListViewModel
 import com.quill.ui.theme.ButtonShape
@@ -54,14 +56,14 @@ fun ConversationDrawer(
         ) {
             // Header
             Text(
-                text = "HISTORY",
+                text = stringResource(R.string.conv_history),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outline,
                 modifier = Modifier.padding(horizontal = 20.dp),
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "Conversations",
+                text = stringResource(R.string.conv_title),
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.padding(horizontal = 20.dp),
@@ -81,7 +83,7 @@ fun ConversationDrawer(
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp),
             ) {
-                Text("+ New Chat", style = MaterialTheme.typography.labelLarge)
+                Text(stringResource(R.string.conv_new_chat), style = MaterialTheme.typography.labelLarge)
             }
 
             Spacer(Modifier.height(16.dp))
@@ -96,7 +98,7 @@ fun ConversationDrawer(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "No conversations yet",
+                        text = stringResource(R.string.conv_empty),
                         style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
                         color = MaterialTheme.colorScheme.outline,
                     )
@@ -147,7 +149,7 @@ private fun DrawerConversationItem(
             )
             TextButton(onClick = onDelete) {
                 Text(
-                    "DEL",
+                    stringResource(R.string.conv_del),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.error.copy(alpha = 0.7f),
                 )

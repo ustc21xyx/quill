@@ -24,11 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.quill.R
 import com.quill.domain.model.Persona
 import com.quill.ui.theme.ButtonShape
 import com.quill.ui.components.PaperSurface
@@ -52,13 +54,13 @@ fun SettingsScreen(
             .padding(24.dp),
     ) {
         Text(
-            text = "CONFIGURATION",
+            text = stringResource(R.string.settings_header),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.outline,
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Settings",
+            text = stringResource(R.string.settings_title),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onSurface,
         )
@@ -66,20 +68,20 @@ fun SettingsScreen(
         Spacer(Modifier.height(32.dp))
 
         // Default model
-        SettingsItem(label = "DEFAULT MODEL", value = defaultModelName ?: "Not configured")
+        SettingsItem(label = stringResource(R.string.settings_default_model), value = defaultModelName ?: stringResource(R.string.settings_not_configured))
 
         Spacer(Modifier.height(24.dp))
 
         // Context message count
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = "CONTEXT MESSAGES",
+                text = stringResource(R.string.settings_context),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outlineVariant,
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                text = "Number of history messages sent to the API",
+                text = stringResource(R.string.settings_context_hint),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.outline,
             )
@@ -116,13 +118,13 @@ fun SettingsScreen(
         ) {
             Column {
                 Text(
-                    text = "PERSONAS",
+                    text = stringResource(R.string.settings_personas),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline,
                 )
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    text = "AI personalities with custom system prompts",
+                    text = stringResource(R.string.settings_personas_hint),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -139,7 +141,7 @@ fun SettingsScreen(
                 contentColor = MaterialTheme.colorScheme.onPrimary,
             ),
         ) {
-            Text("+ New Persona", style = MaterialTheme.typography.labelLarge)
+            Text(stringResource(R.string.settings_new_persona), style = MaterialTheme.typography.labelLarge)
         }
 
         Spacer(Modifier.height(16.dp))
@@ -156,7 +158,7 @@ fun SettingsScreen(
 
         if (personas.isEmpty()) {
             Text(
-                text = "No personas yet. Create one to customize your AI.",
+                text = stringResource(R.string.settings_no_personas),
                 style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
                 color = MaterialTheme.colorScheme.outline,
             )
@@ -168,19 +170,19 @@ fun SettingsScreen(
 
         // About
         Text(
-            text = "ABOUT",
+            text = stringResource(R.string.settings_about),
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.outline,
         )
         Spacer(Modifier.height(16.dp))
         Text(
-            text = "Quill",
+            text = stringResource(R.string.app_name),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "Version 1.0.0",
+            text = stringResource(R.string.settings_version, "1.0.6"),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.outline,
         )
@@ -208,7 +210,7 @@ private fun PersonaItem(
                 )
                 if (persona.isDefault) {
                     Text(
-                        text = "DEFAULT",
+                        text = stringResource(R.string.model_default),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary,
                     )
@@ -237,7 +239,7 @@ private fun PersonaItem(
             ) {
                 if (!persona.isDefault) {
                     TextButton(onClick = onSetDefault) {
-                        Text("DEFAULT", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.tertiary)
+                        Text(stringResource(R.string.model_default), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.tertiary)
                     }
                 }
                 TextButton(onClick = onEdit) {

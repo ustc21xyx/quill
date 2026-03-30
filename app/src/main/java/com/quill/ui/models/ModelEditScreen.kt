@@ -35,6 +35,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -42,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.roundToInt
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.quill.R
 import com.quill.ui.theme.ButtonShape
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -66,7 +68,7 @@ fun ModelEditScreen(
         // Back button
         TextButton(onClick = onBack) {
             Text(
-                text = "< BACK",
+                text = stringResource(R.string.back),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outline,
             )
@@ -75,7 +77,7 @@ fun ModelEditScreen(
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = if (state.isNew) "Register Model" else "Edit Model",
+            text = if (state.isNew) stringResource(R.string.model_edit_add_title) else stringResource(R.string.model_edit_edit_title),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onSurface,
         )
@@ -88,7 +90,7 @@ fun ModelEditScreen(
 
         Column {
             Text(
-                text = "PROVIDER",
+                text = stringResource(R.string.model_edit_provider),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outlineVariant,
             )
@@ -103,7 +105,7 @@ fun ModelEditScreen(
                     readOnly = true,
                     placeholder = {
                         Text(
-                            text = "Select a provider",
+                            text = stringResource(R.string.model_edit_provider_hint),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
                         )
@@ -152,7 +154,7 @@ fun ModelEditScreen(
         if (state.providers.isEmpty()) {
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "No providers configured. Add a provider first.",
+                text = stringResource(R.string.model_edit_no_provider),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.error,
             )
@@ -163,8 +165,8 @@ fun ModelEditScreen(
         QuillTextField(
             value = state.displayName,
             onValueChange = viewModel::updateDisplayName,
-            label = "DISPLAY NAME",
-            placeholder = "e.g. Claude Sonnet",
+            label = stringResource(R.string.model_edit_name),
+            placeholder = stringResource(R.string.model_edit_name_hint),
         )
 
         Spacer(Modifier.height(20.dp))
@@ -172,8 +174,8 @@ fun ModelEditScreen(
         QuillTextField(
             value = state.modelId,
             onValueChange = viewModel::updateModelId,
-            label = "MODEL ID",
-            placeholder = "e.g. gpt-4o, claude-sonnet-4-20250514",
+            label = stringResource(R.string.model_edit_id),
+            placeholder = stringResource(R.string.model_edit_id_hint),
         )
 
         Spacer(Modifier.height(20.dp))
@@ -181,7 +183,7 @@ fun ModelEditScreen(
         // Temperature
         Column {
             Text(
-                text = "TEMPERATURE",
+                text = stringResource(R.string.model_edit_temp),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outlineVariant,
             )
@@ -212,8 +214,8 @@ fun ModelEditScreen(
         QuillTextField(
             value = state.maxTokens.toString(),
             onValueChange = { viewModel.updateMaxTokens(it.toIntOrNull() ?: 4096) },
-            label = "MAX TOKENS",
-            placeholder = "4096",
+            label = stringResource(R.string.model_edit_max_tokens),
+            placeholder = stringResource(R.string.model_edit_max_tokens_hint),
             keyboardType = KeyboardType.Number,
         )
 
@@ -233,16 +235,17 @@ fun ModelEditScreen(
                     )
                     Spacer(Modifier.width(8.dp))
                 }
-                Text("Test Connection", style = MaterialTheme.typography.labelLarge)
+                Text(stringResource(R.string.model_edit_test), style = MaterialTheme.typography.labelLarge)
             }
         }
 
         state.testResult?.let { result ->
+            val connectedText = stringResource(R.string.model_edit_connected)
             Spacer(Modifier.height(8.dp))
             Text(
                 text = result,
                 style = MaterialTheme.typography.bodySmall,
-                color = if (result.startsWith("Connected")) {
+                color = if (result.startsWith(connectedText)) {
                     MaterialTheme.colorScheme.tertiary
                 } else {
                     MaterialTheme.colorScheme.error
@@ -264,7 +267,7 @@ fun ModelEditScreen(
             ),
         ) {
             Text(
-                text = if (state.isNew) "Register" else "Save",
+                text = if (state.isNew) stringResource(R.string.model_edit_register) else stringResource(R.string.model_edit_save),
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.padding(vertical = 4.dp),
             )

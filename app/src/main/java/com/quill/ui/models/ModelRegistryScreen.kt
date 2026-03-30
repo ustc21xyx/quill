@@ -18,9 +18,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.quill.R
 import com.quill.ui.components.ModelCard
 import com.quill.ui.theme.ButtonShape
 
@@ -41,19 +43,19 @@ fun ModelRegistryScreen(
         item {
             Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp)) {
                 Text(
-                    text = "CONFIGURATION INDEX",
+                    text = stringResource(R.string.model_header),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline,
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "Model Registry",
+                    text = stringResource(R.string.model_title),
                     style = MaterialTheme.typography.headlineLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "Manage your AI model configurations. Add API endpoints and keys to start chatting.",
+                    text = stringResource(R.string.model_subtitle),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -67,7 +69,7 @@ fun ModelRegistryScreen(
                     ),
                 ) {
                     Text(
-                        text = "Register New Model",
+                        text = stringResource(R.string.model_register),
                         style = MaterialTheme.typography.labelLarge,
                     )
                 }
@@ -83,13 +85,13 @@ fun ModelRegistryScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "No models configured",
+                        text = stringResource(R.string.model_empty),
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.outline,
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Add your first model to begin",
+                        text = stringResource(R.string.model_empty_hint),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.outlineVariant,
                     )

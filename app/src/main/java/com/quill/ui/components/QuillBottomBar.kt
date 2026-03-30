@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.quill.ui.navigation.Routes
@@ -49,7 +50,7 @@ fun QuillBottomBar(
                     else -> currentRoute == tab.route
                 }
                 BottomBarItem(
-                    label = tab.label,
+                    label = stringResource(tab.labelRes),
                     isSelected = isSelected,
                     onClick = { onNavigate(tab.route) },
                     modifier = Modifier.weight(1f),

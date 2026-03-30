@@ -25,6 +25,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.ui.res.stringResource
+import com.quill.R
 import com.quill.domain.model.Provider
 import com.quill.ui.components.PaperSurface
 import com.quill.ui.theme.ButtonShape
@@ -47,19 +49,19 @@ fun ProviderListScreen(
         item {
             Column(modifier = Modifier.padding(horizontal = 8.dp, vertical = 16.dp)) {
                 Text(
-                    text = "API CONNECTIONS",
+                    text = stringResource(R.string.prov_header),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.outline,
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "Providers",
+                    text = stringResource(R.string.prov_title),
                     style = MaterialTheme.typography.headlineLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "Add API providers to auto-fetch available models.",
+                    text = stringResource(R.string.prov_subtitle),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -74,13 +76,13 @@ fun ProviderListScreen(
                         ),
                     ) {
                         Text(
-                            text = "Add Provider",
+                            text = stringResource(R.string.prov_add),
                             style = MaterialTheme.typography.labelLarge,
                         )
                     }
                     TextButton(onClick = onViewModels) {
                         Text(
-                            text = "View Models",
+                            text = stringResource(R.string.prov_view_models),
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.primary,
                         )
@@ -98,13 +100,13 @@ fun ProviderListScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "No providers configured",
+                        text = stringResource(R.string.prov_empty),
                         style = MaterialTheme.typography.headlineSmall,
                         color = MaterialTheme.colorScheme.outline,
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Add your first API provider to begin",
+                        text = stringResource(R.string.prov_empty_hint),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.outlineVariant,
                     )
@@ -141,7 +143,7 @@ private fun ProviderCard(
             )
             Spacer(Modifier.height(12.dp))
             Text(
-                text = "ENDPOINT",
+                text = stringResource(R.string.prov_endpoint),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outlineVariant,
             )
@@ -154,7 +156,7 @@ private fun ProviderCard(
             )
             Spacer(Modifier.height(8.dp))
             Text(
-                text = "API KEY",
+                text = stringResource(R.string.prov_api_key),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outlineVariant,
             )
@@ -174,21 +176,21 @@ private fun ProviderCard(
             ) {
                 TextButton(onClick = onRefresh) {
                     Text(
-                        "REFRESH MODELS",
+                        stringResource(R.string.prov_refresh),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.tertiary,
                     )
                 }
                 TextButton(onClick = onEdit) {
                     Text(
-                        "EDIT",
+                        stringResource(R.string.prov_edit),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
                 TextButton(onClick = onDelete) {
                     Text(
-                        "DELETE",
+                        stringResource(R.string.prov_delete),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.error,
                     )

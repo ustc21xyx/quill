@@ -20,6 +20,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.quill.R
 import com.quill.ui.chat.ChatScreen
 import com.quill.ui.components.ConversationDrawer
 import com.quill.ui.components.QuillBottomBar
@@ -48,10 +49,10 @@ object Routes {
     fun personaEdit(personaId: String) = "personas/edit/$personaId"
 }
 
-enum class TopLevelRoute(val route: String, val label: String) {
-    Chat(Routes.CHAT_NEW, "Chat"),
-    Providers(Routes.PROVIDERS, "API"),
-    Settings(Routes.SETTINGS, "Settings"),
+enum class TopLevelRoute(val route: String, val labelRes: Int) {
+    Chat(Routes.CHAT_NEW, R.string.nav_chat),
+    Providers(Routes.PROVIDERS, R.string.nav_api),
+    Settings(Routes.SETTINGS, R.string.nav_settings),
 }
 
 @Composable

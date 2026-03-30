@@ -24,8 +24,10 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
+import com.quill.R
 import com.quill.ui.chat.ChatMessageUi
 import com.quill.ui.theme.AiBubbleShape
 import com.quill.ui.theme.UserBubbleShape
@@ -63,7 +65,7 @@ fun AiBubble(
             }
             Spacer(Modifier.padding(start = 8.dp))
             Text(
-                text = if (message.isStreaming) "COMPOSING..." else "QUILL",
+                text = if (message.isStreaming) stringResource(R.string.chat_composing) else stringResource(R.string.chat_quill),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outline,
             )
@@ -114,14 +116,14 @@ fun AiBubble(
                             clipboard.setText(AnnotatedString(message.content))
                         }) {
                             Text(
-                                "COPY",
+                                stringResource(R.string.chat_copy),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.outline,
                             )
                         }
                         TextButton(onClick = onRegenerate) {
                             Text(
-                                "REGENERATE",
+                                stringResource(R.string.chat_regenerate),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.outline,
                             )
@@ -150,7 +152,7 @@ fun UserBubble(
             modifier = Modifier.padding(end = 4.dp, bottom = 6.dp),
         ) {
             Text(
-                text = "YOU",
+                text = stringResource(R.string.chat_you),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outline,
             )

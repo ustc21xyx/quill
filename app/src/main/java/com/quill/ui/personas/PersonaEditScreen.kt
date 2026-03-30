@@ -19,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.quill.R
 import com.quill.ui.theme.ButtonShape
 
 @Composable
@@ -44,7 +46,7 @@ fun PersonaEditScreen(
     ) {
         TextButton(onClick = onBack) {
             Text(
-                text = "< BACK",
+                text = stringResource(R.string.back),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.outline,
             )
@@ -53,13 +55,13 @@ fun PersonaEditScreen(
         Spacer(Modifier.height(16.dp))
 
         Text(
-            text = if (state.isNew) "Create Persona" else "Edit Persona",
+            text = if (state.isNew) stringResource(R.string.persona_add_title) else stringResource(R.string.persona_edit_title),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onSurface,
         )
         Spacer(Modifier.height(8.dp))
         Text(
-            text = "Give your AI a personality. The system prompt is sent at the start of every conversation.",
+            text = stringResource(R.string.persona_subtitle),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -67,11 +69,11 @@ fun PersonaEditScreen(
         Spacer(Modifier.height(32.dp))
 
         // Name
-        LabeledField(label = "NAME") {
+        LabeledField(label = stringResource(R.string.persona_name)) {
             OutlinedTextField(
                 value = state.name,
                 onValueChange = viewModel::updateName,
-                placeholder = { Text("e.g. Code Assistant, Creative Writer") },
+                placeholder = { Text(stringResource(R.string.persona_name_hint)) },
                 modifier = Modifier.fillMaxWidth(),
                 textStyle = MaterialTheme.typography.bodyMedium,
                 colors = fieldColors(),
@@ -82,11 +84,11 @@ fun PersonaEditScreen(
         Spacer(Modifier.height(20.dp))
 
         // Description
-        LabeledField(label = "DESCRIPTION (optional)") {
+        LabeledField(label = stringResource(R.string.persona_desc)) {
             OutlinedTextField(
                 value = state.description,
                 onValueChange = viewModel::updateDescription,
-                placeholder = { Text("Brief description of this persona") },
+                placeholder = { Text(stringResource(R.string.persona_desc_hint)) },
                 modifier = Modifier.fillMaxWidth(),
                 textStyle = MaterialTheme.typography.bodyMedium,
                 colors = fieldColors(),
@@ -97,11 +99,11 @@ fun PersonaEditScreen(
         Spacer(Modifier.height(20.dp))
 
         // System prompt
-        LabeledField(label = "SYSTEM PROMPT") {
+        LabeledField(label = stringResource(R.string.persona_prompt)) {
             OutlinedTextField(
                 value = state.systemPrompt,
                 onValueChange = viewModel::updateSystemPrompt,
-                placeholder = { Text("You are a helpful assistant that...") },
+                placeholder = { Text(stringResource(R.string.persona_prompt_hint)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp),
@@ -124,7 +126,7 @@ fun PersonaEditScreen(
             ),
         ) {
             Text(
-                text = if (state.isNew) "Create" else "Save",
+                text = if (state.isNew) stringResource(R.string.persona_create) else stringResource(R.string.persona_save),
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier.padding(vertical = 4.dp),
             )

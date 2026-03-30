@@ -16,8 +16,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.quill.R
 import com.quill.domain.model.ModelConfig
 
 @Composable
@@ -56,7 +58,7 @@ fun ModelCard(
                         shape = RoundedCornerShape(50),
                     ) {
                         Text(
-                            text = "DEFAULT",
+                            text = stringResource(R.string.model_default),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
@@ -68,9 +70,9 @@ fun ModelCard(
             Spacer(Modifier.height(20.dp))
 
             // Info fields
-            LedgerField(label = "PROVIDER", value = providerName)
+            LedgerField(label = stringResource(R.string.model_provider), value = providerName)
             Spacer(Modifier.height(12.dp))
-            LedgerField(label = "MODEL ID", value = model.modelId)
+            LedgerField(label = stringResource(R.string.model_id), value = model.modelId)
 
             Spacer(Modifier.height(16.dp))
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.15f))
@@ -84,7 +86,7 @@ fun ModelCard(
                 if (!model.isDefault) {
                     TextButton(onClick = onSetDefault) {
                         Text(
-                            "SET DEFAULT",
+                            stringResource(R.string.model_set_default),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.tertiary,
                         )
@@ -92,14 +94,14 @@ fun ModelCard(
                 }
                 TextButton(onClick = onEdit) {
                     Text(
-                        "EDIT",
+                        stringResource(R.string.model_edit),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.primary,
                     )
                 }
                 TextButton(onClick = onDelete) {
                     Text(
-                        "DELETE",
+                        stringResource(R.string.model_delete),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.error,
                     )

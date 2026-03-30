@@ -35,8 +35,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
+import com.quill.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.quill.domain.model.MessageRole
@@ -89,13 +91,13 @@ fun ChatScreen(
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
                             Text(
-                                text = "Quill",
+                                text = stringResource(R.string.app_name),
                                 style = MaterialTheme.typography.displayLarge,
                                 color = MaterialTheme.colorScheme.outlineVariant,
                             )
                             Spacer(Modifier.height(8.dp))
                             Text(
-                                text = "Start typing...",
+                                text = stringResource(R.string.chat_placeholder),
                                 style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
                                 color = MaterialTheme.colorScheme.outline,
                             )
@@ -137,7 +139,7 @@ fun ChatScreen(
                     .padding(bottom = 80.dp),
                 action = {
                     TextButton(onClick = viewModel::dismissError) {
-                        Text("DISMISS")
+                        Text(stringResource(R.string.chat_dismiss))
                     }
                 },
                 containerColor = MaterialTheme.colorScheme.errorContainer,
@@ -189,7 +191,7 @@ private fun ChatTopBar(
                 TextButton(onClick = { showModelMenu = true }) {
                     Column(horizontalAlignment = Alignment.End) {
                         Text(
-                            text = "MODEL",
+                            text = stringResource(R.string.chat_model),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.outline,
                         )
@@ -255,7 +257,7 @@ private fun ChatInputBar(
                 decorationBox = { innerTextField ->
                     if (text.isEmpty()) {
                         Text(
-                            text = "Start typing...",
+                            text = stringResource(R.string.chat_placeholder),
                             style = MaterialTheme.typography.bodyMedium.copy(fontStyle = FontStyle.Italic),
                             color = MaterialTheme.colorScheme.outline.copy(alpha = 0.5f),
                         )

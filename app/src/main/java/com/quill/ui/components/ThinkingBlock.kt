@@ -26,9 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.quill.R
 
 @Composable
 fun ThinkingBlock(
@@ -58,13 +60,13 @@ fun ThinkingBlock(
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = if (isStreaming) "THINKING..." else "REASONING",
+                text = if (isStreaming) stringResource(R.string.thinking_label) else stringResource(R.string.thinking_reasoning),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
             )
             Spacer(Modifier.weight(1f))
             Text(
-                text = if (expanded) "COLLAPSE" else "EXPAND",
+                text = if (expanded) stringResource(R.string.thinking_collapse) else stringResource(R.string.thinking_expand),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.6f),
             )
