@@ -1,5 +1,8 @@
 package com.quill.ui.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
@@ -79,10 +82,7 @@ fun QuillNavigation() {
                 onNewChat = {
                     scope.launch { drawerState.close() }
                     navController.navigate(Routes.CHAT_NEW) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                        launchSingleTop = true
+                        popUpTo(Routes.CHAT_NEW) { inclusive = true }
                     }
                 },
             )
@@ -116,6 +116,10 @@ fun QuillNavigation() {
                 navController = navController,
                 startDestination = Routes.CHAT_NEW,
                 modifier = Modifier.padding(innerPadding),
+                enterTransition = { fadeIn(tween(150)) },
+                exitTransition = { fadeOut(tween(100)) },
+                popEnterTransition = { fadeIn(tween(150)) },
+                popExitTransition = { fadeOut(tween(100)) },
             ) {
                 composable(Routes.CHAT_NEW) {
                     ChatScreen(

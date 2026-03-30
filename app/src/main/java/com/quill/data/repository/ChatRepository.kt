@@ -33,6 +33,7 @@ class ChatRepository @Inject constructor(
                     content = msg.content,
                 )
             },
+            stream = true,
             temperature = modelConfig.temperature,
             max_tokens = modelConfig.maxTokens,
         )
