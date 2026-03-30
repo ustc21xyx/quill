@@ -19,8 +19,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Surface
@@ -111,7 +116,10 @@ fun ChatScreen(
                             message = message,
                             onRegenerate = viewModel::regenerate,
                         )
-                        MessageRole.USER -> UserBubble(message = message)
+                        MessageRole.USER -> UserBubble(
+                            message = message,
+                            onEdit = { viewModel.editMessage(message.id) },
+                        )
                         MessageRole.SYSTEM -> {} // Not displayed
                     }
                 }
@@ -168,11 +176,11 @@ private fun ChatTopBar(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         // Hamburger menu for conversation drawer
-        TextButton(onClick = onOpenDrawer) {
-            Text(
-                text = "\u2630",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary,
+        IconButton(onClick = onOpenDrawer) {
+            Icon(
+                Icons.Default.Menu,
+                contentDescription = "Menu",
+                tint = MaterialTheme.colorScheme.onSurface,
             )
         }
 
@@ -280,10 +288,10 @@ private fun ChatInputBar(
                 modifier = Modifier.size(40.dp),
             ) {
                 Box(contentAlignment = Alignment.Center) {
-                    Text(
-                        text = "\u2191", // up arrow
-                        style = MaterialTheme.typography.titleMedium,
-                        color = if (text.isNotBlank() && !isStreaming) {
+                    Icon(
+                        Icons.AutoMirrored.Default.Send,
+                        contentDescription = "Send",
+                        tint = if (text.isNotBlank() && !isStreaming) {
                             MaterialTheme.colorScheme.surface
                         } else {
                             MaterialTheme.colorScheme.outline

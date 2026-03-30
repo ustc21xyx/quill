@@ -156,6 +156,28 @@ class ChatViewModel @Inject constructor(
         startStreaming(model)
     }
 
+    fun editMessage(messageId: String) {
+        if (_state.value.isStreaming) return
+
+        val messages = _state.value.messages
+        val index = messages.indexOfFirst { it.id == messageId }
+        if (index < 0) return
+
+        val messageToEdit = messages[index]
+        _state.update { state ->
+            state.copy(
+                inputText = messageToEdit.content,
+                messages = messages.subList(0, index),
+            )
+        }
+
+        viewModelScope.launch {
+            if (conversationId.isNotEmpty()) {
+                conversationRepository.deleteMessagesFrom(conversationId, messageId)
+            }
+        }
+    }
+
     fun dismissError() {
         _state.update { it.copy(error = null) }
     }

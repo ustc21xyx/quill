@@ -4,6 +4,13 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Api
+import androidx.compose.material.icons.filled.ChatBubble
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Api
+import androidx.compose.material.icons.outlined.ChatBubbleOutline
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
@@ -13,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -49,10 +57,15 @@ object Routes {
     fun personaEdit(personaId: String) = "personas/edit/$personaId"
 }
 
-enum class TopLevelRoute(val route: String, val labelRes: Int) {
-    Chat(Routes.CHAT_NEW, R.string.nav_chat),
-    Providers(Routes.PROVIDERS, R.string.nav_api),
-    Settings(Routes.SETTINGS, R.string.nav_settings),
+enum class TopLevelRoute(
+    val route: String,
+    val labelRes: Int,
+    val outlinedIcon: ImageVector,
+    val filledIcon: ImageVector,
+) {
+    Chat(Routes.CHAT_NEW, R.string.nav_chat, Icons.Outlined.ChatBubbleOutline, Icons.Filled.ChatBubble),
+    Providers(Routes.PROVIDERS, R.string.nav_api, Icons.Outlined.Api, Icons.Filled.Api),
+    Settings(Routes.SETTINGS, R.string.nav_settings, Icons.Outlined.Settings, Icons.Filled.Settings),
 }
 
 @Composable
@@ -84,6 +97,15 @@ fun QuillNavigation() {
                     scope.launch { drawerState.close() }
                     navController.navigate(Routes.CHAT_NEW) {
                         popUpTo(Routes.CHAT_NEW) { inclusive = true }
+                    }
+                },
+                onDeleteConversation = { deletedId ->
+                    val currentConversationId = navBackStackEntry?.arguments?.getString("conversationId")
+                    if (currentConversationId == deletedId) {
+                        scope.launch { drawerState.close() }
+                        navController.navigate(Routes.CHAT_NEW) {
+                            popUpTo(Routes.CHAT_NEW) { inclusive = true }
+                        }
                     }
                 },
             )

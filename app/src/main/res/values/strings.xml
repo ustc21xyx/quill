@@ -14,6 +14,7 @@
     <string name="chat_model">MODEL</string>
     <string name="chat_copy">COPY</string>
     <string name="chat_regenerate">REGENERATE</string>
+    <string name="chat_edit">EDIT</string>
     <string name="chat_dismiss">DISMISS</string>
 
     <!-- Thinking -->
@@ -99,6 +100,10 @@
     <string name="settings_not_configured">Not configured</string>
     <string name="settings_context">CONTEXT MESSAGES</string>
     <string name="settings_context_hint">Number of history messages sent to the API</string>
+    <string name="settings_language">LANGUAGE</string>
+    <string name="settings_lang_system">System Default</string>
+    <string name="settings_lang_en">English</string>
+    <string name="settings_lang_zh">简体中文</string>
     <string name="settings_personas">PERSONAS</string>
     <string name="settings_personas_hint">AI personalities with custom system prompts</string>
     <string name="settings_new_persona">+ New Persona</string>
@@ -118,4 +123,7 @@
     <string name="persona_prompt_hint">You are a helpful assistant that…</string>
     <string name="persona_create">Create</string>
     <string name="persona_save">Save</string>
+
+    <!-- Code Block -->
+    <string name="code_copy">COPY</string>
 </resources>

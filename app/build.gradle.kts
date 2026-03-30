@@ -71,12 +71,18 @@ dependencies {
     // Markdown
     implementation("com.github.jeziellago:compose-markdown:0.5.4")
 
+    // Icons
+    implementation("androidx.compose.material:material-icons-extended:1.7.6")
+
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+
+    // AppCompat
+    implementation("androidx.appcompat:appcompat:1.7.0")
 
     // Core
     implementation("androidx.core:core-ktx:1.15.0")

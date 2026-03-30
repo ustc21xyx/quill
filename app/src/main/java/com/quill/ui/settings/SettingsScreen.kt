@@ -2,6 +2,7 @@ package com.quill.ui.settings
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +15,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
@@ -22,6 +25,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -45,6 +51,7 @@ fun SettingsScreen(
 ) {
     val defaultModelName by viewModel.defaultModelName.collectAsStateWithLifecycle()
     val contextCount by viewModel.contextMessageCount.collectAsStateWithLifecycle()
+    val languageCode by viewModel.languageCode.collectAsStateWithLifecycle()
     val personas by viewModel.personas.collectAsStateWithLifecycle()
 
     Column(
@@ -103,6 +110,53 @@ fun SettingsScreen(
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
+            }
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        // Language selector
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = stringResource(R.string.settings_language),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.outlineVariant,
+            )
+            Spacer(Modifier.height(8.dp))
+
+            val languageOptions = listOf(
+                "system" to stringResource(R.string.settings_lang_system),
+                "en" to stringResource(R.string.settings_lang_en),
+                "zh" to stringResource(R.string.settings_lang_zh),
+            )
+            val currentLabel = languageOptions.firstOrNull { it.first == languageCode }?.second
+                ?: stringResource(R.string.settings_lang_system)
+
+            var expanded by remember { mutableStateOf(false) }
+
+            Box {
+                Text(
+                    text = currentLabel,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { expanded = true },
+                )
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                ) {
+                    languageOptions.forEach { (code, label) ->
+                        DropdownMenuItem(
+                            text = { Text(label) },
+                            onClick = {
+                                expanded = false
+                                viewModel.updateLanguage(code)
+                            },
+                        )
+                    }
+                }
             }
         }
 

@@ -1,6 +1,8 @@
 package com.quill.ui.settings
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.quill.data.repository.ModelRepository
@@ -36,10 +38,24 @@ class SettingsViewModel @Inject constructor(
     private val _contextMessageCount = MutableStateFlow(prefs.getInt("context_message_count", 20))
     val contextMessageCount: StateFlow<Int> = _contextMessageCount.asStateFlow()
 
+    private val _languageCode = MutableStateFlow(prefs.getString("language", "system") ?: "system")
+    val languageCode: StateFlow<String> = _languageCode.asStateFlow()
+
     fun updateContextMessageCount(count: Int) {
         val clamped = count.coerceIn(1, 100)
         _contextMessageCount.value = clamped
         prefs.edit().putInt("context_message_count", clamped).apply()
+    }
+
+    fun updateLanguage(code: String) {
+        _languageCode.value = code
+        prefs.edit().putString("language", code).apply()
+        val locales = if (code == "system") {
+            LocaleListCompat.getEmptyLocaleList()
+        } else {
+            LocaleListCompat.forLanguageTags(code)
+        }
+        AppCompatDelegate.setApplicationLocales(locales)
     }
 
     fun deletePersona(id: String) {

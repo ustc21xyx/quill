@@ -40,6 +40,7 @@ import java.util.Locale
 fun ConversationDrawer(
     onConversationClick: (String) -> Unit,
     onNewChat: () -> Unit,
+    onDeleteConversation: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ConversationListViewModel = hiltViewModel(),
 ) {
@@ -109,7 +110,10 @@ fun ConversationDrawer(
                         DrawerConversationItem(
                             conversation = conversation,
                             onClick = { onConversationClick(conversation.id) },
-                            onDelete = { viewModel.deleteConversation(conversation.id) },
+                            onDelete = {
+                                viewModel.deleteConversation(conversation.id)
+                                onDeleteConversation(conversation.id)
+                            },
                         )
                     }
                 }

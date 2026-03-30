@@ -67,6 +67,10 @@ class ConversationRepository @Inject constructor(
     suspend fun deleteLastAssistantMessage(conversationId: String) {
         messageDao.deleteLastAssistantMessage(conversationId)
     }
+
+    suspend fun deleteMessagesFrom(conversationId: String, messageId: String) {
+        messageDao.deleteMessagesFrom(conversationId, messageId)
+    }
 }
 
 private fun ConversationEntity.toDomain() = Conversation(

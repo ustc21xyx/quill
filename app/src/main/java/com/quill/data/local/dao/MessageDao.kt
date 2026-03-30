@@ -30,4 +30,10 @@ interface MessageDao {
 
     @Query("SELECT COUNT(*) FROM messages WHERE conversationId = :conversationId")
     suspend fun getMessageCount(conversationId: String): Int
+
+    @Query("""
+        DELETE FROM messages WHERE conversationId = :conversationId
+        AND createdAt >= (SELECT createdAt FROM messages WHERE id = :messageId)
+    """)
+    suspend fun deleteMessagesFrom(conversationId: String, messageId: String)
 }
