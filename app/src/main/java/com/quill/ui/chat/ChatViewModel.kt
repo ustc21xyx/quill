@@ -164,10 +164,11 @@ class ChatViewModel @Inject constructor(
         if (index < 0) return
 
         val messageToEdit = messages[index]
+        val remainingMessages = messages.take(index).toList()
         _state.update { state ->
             state.copy(
                 inputText = messageToEdit.content,
-                messages = messages.subList(0, index),
+                messages = remainingMessages,
             )
         }
 
