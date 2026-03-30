@@ -72,9 +72,14 @@ class StreamingChatClient(
 
                 try {
                     val reader = BufferedReader(InputStreamReader(inputStream, Charsets.UTF_8))
-                    reader.useLines { lines ->
-                        for (line in lines) {
-                            val event = sseParser.parseLine(line) ?: continue
+                    var hasContent = false
+                    val rawLines = mutableListOf<String>()
+
+                    var line = reader.readLine()
+                    while (line != null) {
+                        rawLines.add(line)
+                        val event = sseParser.parseLine(line)
+                        if (event != null) {
                             when (event) {
                                 is SseEvent.Data -> {
                                     val chunk = event.chunk
@@ -84,11 +89,13 @@ class StreamingChatClient(
                                         // Handle thinking/reasoning content
                                         val thinking = delta.reasoning_content ?: delta.thinking
                                         if (thinking != null) {
+                                            hasContent = true
                                             trySend(StreamEvent.ThinkingDelta(thinking))
                                         }
 
                                         // Handle regular content
                                         if (delta.content != null) {
+                                            hasContent = true
                                             trySend(StreamEvent.ContentDelta(delta.content))
                                         }
 
@@ -102,9 +109,40 @@ class StreamingChatClient(
                                     trySend(StreamEvent.Done)
                                 }
                                 is SseEvent.ParseError -> {
-                                    // Skip malformed lines silently
+                                    // Collect parse errors for debugging
                                 }
                             }
+                        }
+                        line = reader.readLine()
+                    }
+
+                    // If no SSE content was received, try parsing as non-streaming response
+                    if (!hasContent && rawLines.isNotEmpty()) {
+                        val fullBody = rawLines.joinToString("\n")
+                        try {
+                            val jsonElement = json.parseToJsonElement(fullBody)
+                            val choices = jsonElement.jsonObject["choices"]?.jsonArray
+                            if (choices != null && choices.isNotEmpty()) {
+                                val message = choices[0].jsonObject["message"]?.jsonObject
+                                val content = message?.get("content")?.jsonPrimitive?.content
+                                if (content != null) {
+                                    trySend(StreamEvent.ContentDelta(content))
+                                    trySend(StreamEvent.Done)
+                                    hasContent = true
+                                }
+                            }
+                            // Check for error response
+                            if (!hasContent) {
+                                val error = jsonElement.jsonObject["error"]?.jsonObject
+                                val errorMsg = error?.get("message")?.jsonPrimitive?.content
+                                if (errorMsg != null) {
+                                    trySend(StreamEvent.Error("API Error: $errorMsg"))
+                                } else {
+                                    trySend(StreamEvent.Error("Unexpected response: ${fullBody.take(300)}"))
+                                }
+                            }
+                        } catch (_: Exception) {
+                            trySend(StreamEvent.Error("No SSE data received. Raw: ${fullBody.take(300)}"))
                         }
                     }
                 } catch (e: Exception) {
