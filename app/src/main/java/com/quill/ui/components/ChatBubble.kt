@@ -39,6 +39,7 @@ import com.quill.R
 import com.quill.ui.chat.ChatMessageUi
 import com.quill.ui.theme.AiBubbleShape
 import com.quill.ui.theme.UserBubbleShape
+import io.getstream.chat.android.ai.compose.ui.component.StreamingText as StreamAiText
 
 @Composable
 fun AiBubble(
@@ -89,10 +90,14 @@ fun AiBubble(
 
                 // Content
                 if (message.content.isNotEmpty() || message.isStreaming) {
-                    StreamingText(
-                        text = message.content,
-                        isStreaming = message.isStreaming,
-                    )
+                    if (message.isStreaming) {
+                        StreamAiText(
+                            text = message.content,
+                            animate = true,
+                        )
+                    } else {
+                        MarkdownText(content = message.content)
+                    }
                 }
 
                 // Actions (only when not streaming)

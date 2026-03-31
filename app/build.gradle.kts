@@ -9,14 +9,14 @@ plugins {
 
 android {
     namespace = "com.quill"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.quill"
         minSdk = 26
         targetSdk = 35
-        versionCode = 13
-        versionName = "1.0.13"
+        versionCode = 14
+        versionName = "1.0.14"
     }
 
     buildTypes {
@@ -71,6 +71,9 @@ dependencies {
 
     // Markdown
     implementation("com.github.jeziellago:compose-markdown:0.5.4")
+
+    // Stream AI Compose (streaming markdown)
+    implementation("io.getstream:stream-chat-android-ai-compose:0.2.0")
 
     // Icons
     implementation("androidx.compose.material:material-icons-extended:1.7.6")
