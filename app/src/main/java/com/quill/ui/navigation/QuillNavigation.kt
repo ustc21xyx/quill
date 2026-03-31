@@ -3,7 +3,10 @@ package com.quill.ui.navigation
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Api
 import androidx.compose.material.icons.filled.ChatBubble
@@ -78,7 +81,8 @@ fun QuillNavigation() {
 
     val topLevelRoutes = listOf(Routes.CHAT_NEW, Routes.PROVIDERS, Routes.SETTINGS)
     val isChatRoute = currentRoute == Routes.CHAT_NEW || currentRoute == Routes.CHAT
-    val showBottomBar = currentRoute in topLevelRoutes || currentRoute == Routes.CHAT
+    val isKeyboardVisible = WindowInsets.ime.getBottom(LocalDensity.current) > 0
+    val showBottomBar = (currentRoute in topLevelRoutes || currentRoute == Routes.CHAT) && !isKeyboardVisible
     val showTopBar = currentRoute in listOf(Routes.PROVIDERS, Routes.SETTINGS)
 
     ModalNavigationDrawer(

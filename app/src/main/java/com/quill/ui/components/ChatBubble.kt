@@ -54,31 +54,13 @@ fun AiBubble(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.Start,
     ) {
-        // Header
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        // Header — minimal, literary style
+        Text(
+            text = if (message.isStreaming) stringResource(R.string.chat_composing) else stringResource(R.string.chat_quill),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.outline,
             modifier = Modifier.padding(start = 4.dp, bottom = 6.dp),
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(24.dp)
-                    .background(MaterialTheme.colorScheme.primary, CircleShape),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    Icons.Outlined.AutoAwesome,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.surface,
-                )
-            }
-            Spacer(Modifier.padding(start = 8.dp))
-            Text(
-                text = if (message.isStreaming) stringResource(R.string.chat_composing) else stringResource(R.string.chat_quill),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.outline,
-            )
-        }
+        )
 
         // Bubble
         Surface(
@@ -170,31 +152,13 @@ fun UserBubble(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.End,
     ) {
-        // Header
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(end = 4.dp, bottom = 6.dp),
-        ) {
-            Text(
-                text = stringResource(R.string.chat_you),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.outline,
-            )
-            Spacer(Modifier.padding(start = 8.dp))
-            Box(
-                modifier = Modifier
-                    .size(24.dp)
-                    .background(MaterialTheme.colorScheme.surfaceContainerHighest, CircleShape),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    Icons.Outlined.Person,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                    tint = MaterialTheme.colorScheme.primary,
-                )
-            }
-        }
+        // Header — minimal, literary style
+        Text(
+            text = stringResource(R.string.chat_you),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.outline,
+            modifier = Modifier.padding(end = 4.dp, bottom = 6.dp).align(Alignment.End),
+        )
 
         // Bubble
         Surface(

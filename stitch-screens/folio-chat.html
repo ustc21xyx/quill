@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Folio Script AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#d7dcd0",
+              "on-tertiary-fixed": "#454c3d",
+              "surface-container-highest": "#e0e4d9",
+              "secondary-dim": "#52544f",
+              "primary-dim": "#51534e",
+              "tertiary-fixed": "#eff6e2",
+              "secondary-fixed": "#e3e3dc",
+              "inverse-primary": "#fdfdf6",
+              "secondary-fixed-dim": "#d5d5ce",
+              "on-tertiary-container": "#575e4f",
+              "surface": "#faf9f4",
+              "primary-container": "#e3e3dd",
+              "error": "#9e422c",
+              "on-primary": "#f8f8f2",
+              "error-container": "#fe8b70",
+              "on-secondary-container": "#51524d",
+              "on-secondary-fixed-variant": "#5b5c57",
+              "on-tertiary-fixed-variant": "#626859",
+              "tertiary": "#5a6152",
+              "inverse-on-surface": "#9d9d99",
+              "outline": "#787c73",
+              "primary-fixed-dim": "#d4d5cf",
+              "outline-variant": "#afb3aa",
+              "on-secondary-fixed": "#3e403b",
+              "error-dim": "#5c1202",
+              "secondary-container": "#e3e3dc",
+              "primary": "#5d5f5a",
+              "surface-container": "#edefe7",
+              "on-surface": "#2f342d",
+              "surface-container-low": "#f4f4ee",
+              "surface-bright": "#faf9f4",
+              "on-surface-variant": "#5c6058",
+              "surface-container-high": "#e7e9e0",
+              "surface-container-lowest": "#ffffff",
+              "tertiary-fixed-dim": "#e1e8d4",
+              "on-primary-fixed": "#3e403c",
+              "on-primary-fixed-variant": "#5a5c57",
+              "surface-variant": "#e0e4d9",
+              "on-error": "#fff7f6",
+              "tertiary-dim": "#4f5547",
+              "tertiary-container": "#eff6e2",
+              "on-error-container": "#742410",
+              "inverse-surface": "#0d0f0c",
+              "on-tertiary": "#f5fce8",
+              "background": "#faf9f4",
+              "on-primary-container": "#51524e",
+              "on-secondary": "#faf9f2",
+              "primary-fixed": "#e3e3dd",
+              "secondary": "#5e5f5b",
+              "on-background": "#2f342d",
+              "surface-tint": "#5d5f5a"
+            },
+            fontFamily: {
+              "headline": ["Newsreader"],
+              "body": ["Manrope"],
+              "label": ["Manrope"],
+              "serif": ["Newsreader"],
+              "sans": ["Manrope"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .paper-shadow {
+            box-shadow: 0 4px 12px rgba(47, 52, 45, 0.04);
+        }
+        .text-ink { color: #2f342d; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-[#faf9f4] dark:bg-[#1a1c18] flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#5d5f5a] dark:text-[#e3e3dd] hover:bg-[#e0e4d9]/50 dark:hover:bg-[#5a6152]/30 transition-colors rounded-lg">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-serif italic tracking-tight text-xl text-[#2f342d] dark:text-[#f4f4ee]">Digital Ephemera AI</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="hidden md:flex flex-col items-end mr-4">
+<span class="text-[10px] uppercase tracking-widest font-label text-outline">Active Model</span>
+<span class="text-sm font-serif italic text-ink">Folio-1.2-Script</span>
+</div>
+<button class="p-2 text-[#5d5f5a] dark:text-[#e3e3dd] hover:bg-[#e0e4d9]/50 dark:hover:bg-[#5a6152]/30 transition-colors rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Content: Message Feed -->
+<main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8 pb-32">
+<div class="flex flex-col space-y-10">
+<!-- System/Timestamp Note -->
+<div class="flex justify-center">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-outline-variant py-2 px-4 bg-surface-container-low rounded-full">
+                    Monday, October 14th — 09:42 AM
+                </span>
+</div>
+<!-- AI Message Bubble (The Living Folio Aesthetic) -->
+<div class="flex flex-col gap-3 max-w-[85%] md:max-w-[75%] self-start group">
+<div class="flex items-center gap-3 ml-1">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-surface" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-outline">Digital Ephemera</span>
+</div>
+<div class="bg-surface-container-low paper-shadow p-6 rounded-tr-3xl rounded-br-3xl rounded-bl-lg relative border-l-2 border-primary/20">
+<p class="font-serif text-lg leading-relaxed text-ink italic">
+                        "The archive is not a quiet place. It is a cacophony of voices waiting for the right frequency to be heard. How shall we tune our instruments today?"
+                    </p>
+<div class="mt-4 pt-4 border-t border-outline-variant/10 flex gap-4">
+<button class="flex items-center gap-1 text-[10px] uppercase tracking-tighter text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span> Copy
+                        </button>
+<button class="flex items-center gap-1 text-[10px] uppercase tracking-tighter text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">refresh</span> Regenerate
+                        </button>
+</div>
+</div>
+</div>
+<!-- User Message Bubble -->
+<div class="flex flex-col gap-3 max-w-[85%] md:max-w-[75%] self-end items-end group">
+<div class="flex items-center gap-3 mr-1">
+<span class="font-label text-[10px] uppercase tracking-widest text-outline text-right">Research Lead</span>
+<div class="w-6 h-6 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-primary">person</span>
+</div>
+</div>
+<div class="bg-surface-container-highest paper-shadow p-5 rounded-tl-3xl rounded-bl-3xl rounded-br-lg text-ink">
+<p class="font-sans text-[15px] leading-relaxed">
+                        Analyze the marginalia found in the 17th-century herbalist texts. I'm looking for recurring botanical symbols that don't match known taxonomy of the era.
+                    </p>
+</div>
+</div>
+<!-- AI Response (Multi-layered Content) -->
+<div class="flex flex-col gap-3 max-w-[90%] md:max-w-[85%] self-start">
+<div class="flex items-center gap-3 ml-1">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-surface" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+</div>
+<span class="font-label text-[10px] uppercase tracking-widest text-outline">Analysis in progress</span>
+</div>
+<!-- Main Response -->
+<div class="bg-surface-container-lowest paper-shadow p-8 rounded-tr-3xl rounded-br-3xl rounded-bl-lg border border-outline-variant/10">
+<div class="prose prose-sm font-sans text-on-surface leading-relaxed space-y-4">
+<p class="font-serif italic text-xl text-ink mb-4">The Cipher of the Unseen Root</p>
+<p>Upon cross-referencing the digitizations of the <span class="bg-tertiary-container px-1 text-on-tertiary-container">Voynich-adjacent</span> manuscripts, three distinct non-taxonomic symbols recur in the margins of the *Solanaceae* sections:</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-tertiary">
+<span class="font-label text-[10px] text-tertiary uppercase tracking-widest block mb-2">Symbol Type A</span>
+<p class="text-sm font-serif italic text-ink">The "Winged Mandrake" — often found alongside annotations regarding nocturnal harvesting.</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-primary">
+<span class="font-label text-[10px] text-primary uppercase tracking-widest block mb-2">Symbol Type B</span>
+<p class="text-sm font-serif italic text-ink">The "Spiral Rhizome" — appearing exclusively in texts discussing psychoactive properties.</p>
+</div>
+</div>
+<p>These markings appear to be a <span class="font-semibold text-primary underline decoration-outline-variant/30">clandestine taxonomy</span>, likely used by underground alchemical circles to discuss restricted materials without drawing the attention of ecclesiastical censors.</p>
+</div>
+<!-- Margin Note Style Component -->
+<div class="mt-8 pt-6 border-t border-outline-variant/20 flex flex-col md:flex-row gap-6">
+<img alt="Old manuscript" class="w-full md:w-32 h-32 object-cover rounded-lg grayscale opacity-80" data-alt="Close up of an ancient manuscript page with hand-drawn botanical illustrations and elegant cursive ink writing on aged parchment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtssosUMFYhR_koLxadUDMoQ561U-NygzfomZem5xIKNgNTqtfUqyZtw0oSLjIpSvkhjJz67HlMnTXcITimdm1tfDuH4PhWmPM9k8PbHylWg2xLBakrW_MFF-WQtutADzfz7DgZwFC1R92kQTA4Fw0RAxrJiByBMzGEfEgWGFLcKNN4WT04RHa9LpJXwx0r091sCSWQVOwReeRTk7QHeLa3CUL0FMF8l9VECr4-BdXcC3O4gFDyY6s8Ugkp3krymRg5eE6yGXcBHXH"/>
+<div class="flex-1">
+<h4 class="font-label text-[10px] uppercase tracking-[0.15em] text-outline-variant mb-2">Reference Source</h4>
+<p class="font-serif italic text-sm text-ink/70">"The Silent Garden" by Anonymus (1642). Bodleian Library, Archive Box 14-B.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Input Area -->
+<div class="fixed bottom-0 left-0 w-full p-4 md:p-8 bg-gradient-to-t from-surface via-surface/95 to-transparent z-50">
+<div class="max-w-4xl mx-auto">
+<div class="bg-surface-container-lowest paper-shadow rounded-full p-2 flex items-center gap-2 border border-outline-variant/20">
+<!-- Tool/Extension Button -->
+<button class="w-12 h-12 flex items-center justify-center text-outline hover:text-primary hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">extension</span>
+</button>
+<!-- Main Input -->
+<input class="flex-1 bg-transparent border-none focus:ring-0 font-sans text-sm px-4 text-ink placeholder:text-outline/50 placeholder:italic" placeholder="Compose your inquiry..." type="text"/>
+<!-- Attachment -->
+<button class="w-10 h-10 flex items-center justify-center text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<!-- Send Button -->
+<button class="w-12 h-12 bg-primary text-surface rounded-full flex items-center justify-center hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<!-- Contextual Hints -->
+<div class="flex justify-center mt-3 gap-6">
+<div class="flex items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-tertiary">history</span>
+<span class="font-label text-[9px] uppercase tracking-widest text-on-surface">View History</span>
+</div>
+<div class="flex items-center gap-1.5 opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined text-[16px] text-tertiary">memory</span>
+<span class="font-label text-[9px] uppercase tracking-widest text-on-surface">Registry Active</span>
+</div>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-[#faf9f4]/80 dark:bg-[#1a1c18]/80 backdrop-blur-lg border-t border-[#afb3aa]/15 z-[60]">
+<button class="flex flex-col items-center justify-center bg-[#e0e4d9] dark:bg-[#5d5f5a] text-[#2f342d] dark:text-[#faf9f4] rounded-xl px-5 py-1 scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-sans text-[10px] uppercase tracking-widest">Chat</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#5d5f5a] dark:text-[#afb3aa] opacity-60 hover:opacity-100 transition-opacity scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-sans text-[10px] uppercase tracking-widest">Extensions</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#5d5f5a] dark:text-[#afb3aa] opacity-60 hover:opacity-100 transition-opacity scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-sans text-[10px] uppercase tracking-widest">Library</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#5d5f5a] dark:text-[#afb3aa] opacity-60 hover:opacity-100 transition-opacity scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[10px] uppercase tracking-widest">Profile</span>
+</button>
+</nav>
+</body></html>

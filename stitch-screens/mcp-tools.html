@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MCP Tool Chest - Digital Ephemera AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#d7dcd0",
+                        "on-tertiary-fixed": "#454c3d",
+                        "surface-container-highest": "#e0e4d9",
+                        "secondary-dim": "#52544f",
+                        "primary-dim": "#51534e",
+                        "tertiary-fixed": "#eff6e2",
+                        "secondary-fixed": "#e3e3dc",
+                        "inverse-primary": "#fdfdf6",
+                        "secondary-fixed-dim": "#d5d5ce",
+                        "on-tertiary-container": "#575e4f",
+                        "surface": "#faf9f4",
+                        "primary-container": "#e3e3dd",
+                        "error": "#9e422c",
+                        "on-primary": "#f8f8f2",
+                        "error-container": "#fe8b70",
+                        "on-secondary-container": "#51524d",
+                        "on-secondary-fixed-variant": "#5b5c57",
+                        "on-tertiary-fixed-variant": "#626859",
+                        "tertiary": "#5a6152",
+                        "inverse-on-surface": "#9d9d99",
+                        "outline": "#787c73",
+                        "primary-fixed-dim": "#d4d5cf",
+                        "outline-variant": "#afb3aa",
+                        "on-secondary-fixed": "#3e403b",
+                        "error-dim": "#5c1202",
+                        "secondary-container": "#e3e3dc",
+                        "primary": "#5d5f5a",
+                        "surface-container": "#edefe7",
+                        "on-surface": "#2f342d",
+                        "surface-container-low": "#f4f4ee",
+                        "surface-bright": "#faf9f4",
+                        "on-surface-variant": "#5c6058",
+                        "surface-container-high": "#e7e9e0",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#e1e8d4",
+                        "on-primary-fixed": "#3e403c",
+                        "on-primary-fixed-variant": "#5a5c57",
+                        "surface-variant": "#e0e4d9",
+                        "on-error": "#fff7f6",
+                        "tertiary-dim": "#4f5547",
+                        "tertiary-container": "#eff6e2",
+                        "on-error-container": "#742410",
+                        "inverse-surface": "#0d0f0c",
+                        "on-tertiary": "#f5fce8",
+                        "background": "#faf9f4",
+                        "on-primary-container": "#51524e",
+                        "on-secondary": "#faf9f2",
+                        "primary-fixed": "#e3e3dd",
+                        "secondary": "#5e5f5b",
+                        "on-background": "#2f342d",
+                        "surface-tint": "#5d5f5a"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .ink-underline {
+            text-decoration: underline;
+            text-decoration-color: rgba(175, 179, 170, 0.4);
+            text-underline-offset: 4px;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #afb3aa; border-radius: 10px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body selection:bg-surface-container-highest selection:text-primary">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-[#faf9f4] dark:bg-[#1a1c18] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#5d5f5a] dark:text-[#e3e3dd] hover:bg-[#e0e4d9]/50 transition-colors p-2 rounded-full">menu</button>
+<h1 class="text-xl font-serif italic text-[#2f342d] dark:text-[#f4f4ee] tracking-tight">Digital Ephemera AI</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#5d5f5a] dark:text-[#e3e3dd] hover:bg-[#e0e4d9]/50 transition-colors p-2 rounded-full">settings</button>
+</div>
+</header>
+<main class="flex min-h-screen">
+<!-- NavigationDrawer (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen sticky top-0 w-80 bg-[#faf9f4] dark:bg-[#1a1c18] border-r border-[#afb3aa]/15 p-4 z-30">
+<div class="mb-10 px-4">
+<h2 class="font-serif text-2xl italic text-[#2f342d]">The Living Folio</h2>
+<p class="text-label-sm uppercase tracking-widest text-outline mt-2 text-[10px]">Reference Library</p>
+</div>
+<nav class="flex flex-col space-y-2">
+<a class="flex items-center gap-4 px-4 py-3 text-[#5d5f5a] dark:text-[#afb3aa] hover:bg-[#f4f4ee] transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-sans text-sm font-medium tracking-wide">Archives</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#5d5f5a] dark:text-[#afb3aa] hover:bg-[#f4f4ee] transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">edit_note</span>
+<span class="font-sans text-sm font-medium tracking-wide">Scholarly Notes</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#5d5f5a] dark:text-[#afb3aa] hover:bg-[#f4f4ee] transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">memory</span>
+<span class="font-sans text-sm font-medium tracking-wide">Model Registry</span>
+</a>
+<a class="flex items-center gap-4 px-4 py-3 text-[#5d5f5a] dark:text-[#afb3aa] hover:bg-[#f4f4ee] transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-sans text-sm font-medium tracking-wide">Usage History</span>
+</a>
+<div class="my-4 border-t border-outline-variant/15"></div>
+<a class="flex items-center gap-4 px-4 py-3 bg-[#e0e4d9] dark:bg-[#5d5f5a] text-[#2f342d] dark:text-[#faf9f4] rounded-lg" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-sans text-sm font-medium tracking-wide">Extensions</span>
+</a>
+</nav>
+</aside>
+<!-- Content Area -->
+<section class="flex-1 px-6 md:px-16 pt-8 pb-32">
+<!-- Header Section with Asymmetry -->
+<div class="max-w-4xl mb-16">
+<span class="font-label text-label-sm uppercase tracking-widest text-primary mb-4 block">Registry / Model Context Protocol</span>
+<h2 class="font-headline text-5xl md:text-6xl text-on-surface italic mb-6 leading-tight -ml-1">MCP Tool Chest</h2>
+<p class="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Activate specialized sensory extensions to deepen the analytical reach of your ephemeral models. These tools integrate scholarly datasets and live computation directly into the neural stream.
+                </p>
+</div>
+<!-- Tool Grid (Bento Style/Tactile Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card: Google Search -->
+<div class="group relative flex flex-col p-6 bg-surface-container-low rounded-xl transition-all duration-300 hover:bg-surface-container-high border border-transparent hover:border-outline-variant/20 shadow-2xl shadow-[#2f342d]/5">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">language</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<h3 class="font-headline text-xl italic mb-2">Google Search</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">Access real-time global information and citations from the vast digital expanse.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-tertiary-fixed bg-tertiary-fixed px-2 py-1 rounded">Active</span>
+<button class="text-[10px] font-label uppercase tracking-widest ink-underline opacity-60 group-hover:opacity-100 transition-opacity">Details</button>
+</div>
+</div>
+<!-- Card: Code Interpreter -->
+<div class="group relative flex flex-col p-6 bg-surface-container-low rounded-xl transition-all duration-300 hover:bg-surface-container-high border border-transparent hover:border-outline-variant/20 shadow-2xl shadow-[#2f342d]/5">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">terminal</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<h3 class="font-headline text-xl italic mb-2">Code Interpreter</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">Executes Python scripts within a secure sandbox to solve complex mathematical proofs.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-tertiary-fixed bg-tertiary-fixed px-2 py-1 rounded">Active</span>
+<button class="text-[10px] font-label uppercase tracking-widest ink-underline opacity-60 group-hover:opacity-100 transition-opacity">Details</button>
+</div>
+</div>
+<!-- Card: Knowledge Graph -->
+<div class="group relative flex flex-col p-6 bg-surface-container-low rounded-xl transition-all duration-300 hover:bg-surface-container-high border border-transparent hover:border-outline-variant/20 shadow-2xl shadow-[#2f342d]/5">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">hub</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<h3 class="font-headline text-xl italic mb-2">Knowledge Graph</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">Maps entities and semantic relationships using structured internal ontologies.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-[10px] font-label uppercase tracking-widest text-outline bg-surface px-2 py-1 rounded">Inactive</span>
+<button class="text-[10px] font-label uppercase tracking-widest ink-underline opacity-60 group-hover:opacity-100 transition-opacity">Details</button>
+</div>
+</div>
+<!-- Card: arXiv Archives -->
+<div class="group relative flex flex-col p-6 bg-surface-container-low rounded-xl transition-all duration-300 hover:bg-surface-container-high border border-transparent hover:border-outline-variant/20 shadow-2xl shadow-[#2f342d]/5">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">menu_book</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<h3 class="font-headline text-xl italic mb-2">arXiv Indexer</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">Queries the latest academic pre-prints across physics, computer science, and biology.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-[10px] font-label uppercase tracking-widest text-outline bg-surface px-2 py-1 rounded">Inactive</span>
+<button class="text-[10px] font-label uppercase tracking-widest ink-underline opacity-60 group-hover:opacity-100 transition-opacity">Details</button>
+</div>
+</div>
+<!-- Card: Wolfram Alpha -->
+<div class="group relative flex flex-col p-6 bg-surface-container-low rounded-xl transition-all duration-300 hover:bg-surface-container-high border border-transparent hover:border-outline-variant/20 shadow-2xl shadow-[#2f342d]/5">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">function</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<h3 class="font-headline text-xl italic mb-2">Symbolic Engine</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">Connects to computational intelligence for precise algorithmic fact-checking.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-tertiary-fixed bg-tertiary-fixed px-2 py-1 rounded">Active</span>
+<button class="text-[10px] font-label uppercase tracking-widest ink-underline opacity-60 group-hover:opacity-100 transition-opacity">Details</button>
+</div>
+</div>
+<!-- Card: Image Analysis -->
+<div class="group relative flex flex-col p-6 bg-surface-container-low rounded-xl transition-all duration-300 hover:bg-surface-container-high border border-transparent hover:border-outline-variant/20 shadow-2xl shadow-[#2f342d]/5">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 flex items-center justify-center bg-surface rounded-lg">
+<span class="material-symbols-outlined text-primary text-3xl">photo_camera</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant/30 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<h3 class="font-headline text-xl italic mb-2">Visio-Registry</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">Advanced multimodal processing of archival photographs and manuscripts.</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-tertiary-fixed bg-tertiary-fixed px-2 py-1 rounded">Active</span>
+<button class="text-[10px] font-label uppercase tracking-widest ink-underline opacity-60 group-hover:opacity-100 transition-opacity">Details</button>
+</div>
+</div>
+</div>
+<!-- "Margin Note" Signature Component (Desktop Only) -->
+<div class="hidden xl:block absolute top-40 right-16 w-48 opacity-40">
+<p class="font-label text-[10px] uppercase tracking-widest mb-2 border-b border-outline-variant/30 pb-1">Annotation 04-B</p>
+<p class="text-xs italic leading-relaxed font-body">
+                    "Tools are not mere functions; they are lenses. To activate a tool is to choose a specific mode of perception."
+                </p>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-safe bg-[#faf9f4]/80 dark:bg-[#1a1c18]/80 backdrop-blur-lg border-t border-[#afb3aa]/15 z-50">
+<a class="flex flex-col items-center justify-center text-[#5d5f5a] dark:text-[#afb3aa] opacity-60" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#e0e4d9] dark:bg-[#5d5f5a] text-[#2f342d] dark:text-[#faf9f4] rounded-xl px-5 py-1" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Extensions</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5d5f5a] dark:text-[#afb3aa] opacity-60" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Library</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5d5f5a] dark:text-[#afb3aa] opacity-60" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-sans text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>
