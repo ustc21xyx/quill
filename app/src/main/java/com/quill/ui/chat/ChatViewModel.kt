@@ -336,6 +336,16 @@ class ChatViewModel @Inject constructor(
         currentThinkingContent.clear()
     }
 
+    fun stopStreaming() {
+        streamJob?.cancel()
+        streamJob = null
+        // Finalize whatever content we have so far
+        val streamingMsg = _state.value.messages.lastOrNull { it.isStreaming }
+        if (streamingMsg != null) {
+            finalizeMessage(streamingMsg.id)
+        }
+    }
+
     override fun onCleared() {
         streamJob?.cancel()
         super.onCleared()

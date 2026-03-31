@@ -22,6 +22,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -132,6 +133,7 @@ fun ChatScreen(
                 text = state.inputText,
                 onTextChange = viewModel::updateInput,
                 onSend = viewModel::sendMessage,
+                onStop = viewModel::stopStreaming,
                 isStreaming = state.isStreaming,
                 modifier = Modifier,
             )
@@ -233,6 +235,7 @@ private fun ChatInputBar(
     text: String,
     onTextChange: (String) -> Unit,
     onSend: () -> Unit,
+    onStop: () -> Unit,
     isStreaming: Boolean,
     modifier: Modifier = Modifier,
 ) {
@@ -275,27 +278,45 @@ private fun ChatInputBar(
 
             Spacer(Modifier.width(8.dp))
 
-            // Send button
-            Surface(
-                onClick = { if (!isStreaming && text.isNotBlank()) onSend() },
-                color = if (text.isNotBlank() && !isStreaming) {
-                    MaterialTheme.colorScheme.primary
-                } else {
-                    MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
-                },
-                shape = androidx.compose.foundation.shape.CircleShape,
-                modifier = Modifier.size(40.dp),
-            ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        Icons.AutoMirrored.Default.Send,
-                        contentDescription = "Send",
-                        tint = if (text.isNotBlank() && !isStreaming) {
-                            MaterialTheme.colorScheme.surface
-                        } else {
-                            MaterialTheme.colorScheme.outline
-                        },
-                    )
+            // Send / Stop button
+            if (isStreaming) {
+                Surface(
+                    onClick = onStop,
+                    color = MaterialTheme.colorScheme.error,
+                    shape = androidx.compose.foundation.shape.CircleShape,
+                    modifier = Modifier.size(40.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            Icons.Default.Stop,
+                            contentDescription = "Stop",
+                            tint = MaterialTheme.colorScheme.onError,
+                            modifier = Modifier.size(20.dp),
+                        )
+                    }
+                }
+            } else {
+                Surface(
+                    onClick = { if (text.isNotBlank()) onSend() },
+                    color = if (text.isNotBlank()) {
+                        MaterialTheme.colorScheme.primary
+                    } else {
+                        MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
+                    },
+                    shape = androidx.compose.foundation.shape.CircleShape,
+                    modifier = Modifier.size(40.dp),
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            Icons.AutoMirrored.Default.Send,
+                            contentDescription = "Send",
+                            tint = if (text.isNotBlank()) {
+                                MaterialTheme.colorScheme.surface
+                            } else {
+                                MaterialTheme.colorScheme.outline
+                            },
+                        )
+                    }
                 }
             }
         }
