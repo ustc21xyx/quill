@@ -108,6 +108,7 @@
     <string name="settings_personas">PERSONAS</string>
     <string name="settings_personas_hint">AI personalities with custom system prompts</string>
     <string name="settings_new_persona">+ New Persona</string>
+    <string name="settings_clear_persona">Clear Default</string>
     <string name="settings_no_personas">No personas yet. Create one to customize your AI.</string>
     <string name="settings_about">ABOUT</string>
     <string name="settings_version">Version %1$s</string>

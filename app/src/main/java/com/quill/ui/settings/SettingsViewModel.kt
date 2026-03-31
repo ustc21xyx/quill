@@ -66,6 +66,10 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch { personaRepository.setDefault(id) }
     }
 
+    fun clearDefaultPersona() {
+        viewModelScope.launch { personaRepository.clearDefault() }
+    }
+
     companion object {
         fun getContextMessageCount(context: Context): Int {
             return context.getSharedPreferences("quill_settings", Context.MODE_PRIVATE)

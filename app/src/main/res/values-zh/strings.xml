@@ -108,6 +108,7 @@
     <string name="settings_personas">人设</string>
     <string name="settings_personas_hint">带自定义系统提示词的 AI 人格</string>
     <string name="settings_new_persona">+ 新建人设</string>
+    <string name="settings_clear_persona">清除默认</string>
     <string name="settings_no_personas">暂无人设，创建一个来自定义你的 AI。</string>
     <string name="settings_about">关于</string>
     <string name="settings_version">版本 %1$s</string>

@@ -33,4 +33,7 @@ interface PersonaDao {
 
     @Query("UPDATE personas SET isDefault = CASE WHEN id = :id THEN 1 ELSE 0 END")
     suspend fun setDefault(id: String)
+
+    @Query("UPDATE personas SET isDefault = 0")
+    suspend fun clearDefault()
 }

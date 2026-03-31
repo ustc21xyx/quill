@@ -187,15 +187,25 @@ fun SettingsScreen(
 
         Spacer(Modifier.height(16.dp))
 
-        Button(
-            onClick = onAddPersona,
-            shape = ButtonShape,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-            ),
-        ) {
-            Text(stringResource(R.string.settings_new_persona), style = MaterialTheme.typography.labelLarge)
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Button(
+                onClick = onAddPersona,
+                shape = ButtonShape,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                ),
+            ) {
+                Text(stringResource(R.string.settings_new_persona), style = MaterialTheme.typography.labelLarge)
+            }
+            if (personas.any { it.isDefault }) {
+                TextButton(
+                    onClick = { viewModel.clearDefaultPersona() },
+                    shape = ButtonShape,
+                ) {
+                    Text(stringResource(R.string.settings_clear_persona), style = MaterialTheme.typography.labelLarge)
+                }
+            }
         }
 
         Spacer(Modifier.height(16.dp))
@@ -236,7 +246,7 @@ fun SettingsScreen(
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = stringResource(R.string.settings_version, "1.0.17"),
+            text = stringResource(R.string.settings_version, "1.0.18"),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.outline,
         )

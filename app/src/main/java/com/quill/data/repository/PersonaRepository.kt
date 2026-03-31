@@ -42,6 +42,10 @@ class PersonaRepository @Inject constructor(
         dao.setDefault(id)
     }
 
+    suspend fun clearDefault() {
+        dao.clearDefault()
+    }
+
     companion object {
         fun newId(): String = UUID.randomUUID().toString()
     }
