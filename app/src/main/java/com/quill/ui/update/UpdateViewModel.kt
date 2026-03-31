@@ -75,9 +75,11 @@ class UpdateViewModel @Inject constructor(
     private fun downloadApk(context: Context, url: String): File? {
         val updatesDir = File(context.cacheDir, "updates")
         if (!updatesDir.exists()) updatesDir.mkdirs()
+        // Delete ALL old APKs to avoid cache issues
+        updatesDir.listFiles()?.forEach { it.delete() }
 
-        val apkFile = File(updatesDir, "quill-update.apk")
-        if (apkFile.exists()) apkFile.delete()
+        val version = _updateAvailable.value?.version ?: "unknown"
+        val apkFile = File(updatesDir, "quill-$version.apk")
 
         val request = Request.Builder().url(url).build()
         val response = okHttpClient.newCall(request).execute()
