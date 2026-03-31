@@ -15,8 +15,8 @@ android {
         applicationId = "com.quill"
         minSdk = 26
         targetSdk = 35
-        versionCode = 11
-        versionName = "1.0.11"
+        versionCode = 13
+        versionName = "1.0.13"
     }
 
     buildTypes {
@@ -37,6 +37,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

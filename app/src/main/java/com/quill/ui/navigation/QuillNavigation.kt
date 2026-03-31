@@ -20,9 +20,11 @@ import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -41,6 +43,9 @@ import com.quill.ui.personas.PersonaEditScreen
 import com.quill.ui.providers.ProviderEditScreen
 import com.quill.ui.providers.ProviderListScreen
 import com.quill.ui.settings.SettingsScreen
+import com.quill.ui.update.UpdateDialog
+import com.quill.ui.update.UpdateViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import kotlinx.coroutines.launch
 
 object Routes {
@@ -78,6 +83,21 @@ fun QuillNavigation() {
     val currentRoute = navBackStackEntry?.destination?.route
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    val updateViewModel: UpdateViewModel = hiltViewModel()
+    val updateInfo by updateViewModel.updateAvailable.collectAsState()
+    val downloadProgress by updateViewModel.downloadProgress.collectAsState()
+
+    updateInfo?.let { info ->
+        UpdateDialog(
+            updateInfo = info,
+            downloadProgress = downloadProgress,
+            onUpdate = { updateViewModel.downloadAndInstall(context) },
+            onDismiss = { updateViewModel.dismiss() },
+            onCancel = { updateViewModel.cancelDownload() },
+        )
+    }
 
     val topLevelRoutes = listOf(Routes.CHAT_NEW, Routes.PROVIDERS, Routes.SETTINGS)
     val isChatRoute = currentRoute == Routes.CHAT_NEW || currentRoute == Routes.CHAT

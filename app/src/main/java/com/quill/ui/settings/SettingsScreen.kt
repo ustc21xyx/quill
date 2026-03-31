@@ -236,7 +236,7 @@ fun SettingsScreen(
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = stringResource(R.string.settings_version, "1.0.11"),
+            text = stringResource(R.string.settings_version, "1.0.13"),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.outline,
         )

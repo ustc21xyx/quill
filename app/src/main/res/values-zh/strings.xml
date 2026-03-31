@@ -127,4 +127,12 @@
 
     <!-- Code Block -->
     <string name="code_copy">复制</string>
+
+    <!-- Update -->
+    <string name="update_title">发现新版本</string>
+    <string name="update_message">版本 %1$s 可用</string>
+    <string name="update_button">更新</string>
+    <string name="update_later">稍后</string>
+    <string name="update_downloading">下载中…</string>
+    <string name="update_cancel">取消</string>
 </resources>

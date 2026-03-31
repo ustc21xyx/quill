@@ -9,6 +9,7 @@ import com.quill.data.local.dao.ModelConfigDao
 import com.quill.data.local.dao.PersonaDao
 import com.quill.data.local.dao.ProviderDao
 import com.quill.data.remote.StreamingChatClient
+import com.quill.data.remote.UpdateChecker
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,6 +47,11 @@ object AppModule {
     @Singleton
     fun provideStreamingChatClient(okHttp: OkHttpClient, json: Json): StreamingChatClient =
         StreamingChatClient(okHttp, json)
+
+    @Provides
+    @Singleton
+    fun provideUpdateChecker(okHttp: OkHttpClient, json: Json): UpdateChecker =
+        UpdateChecker(okHttp, json)
 
     @Provides
     fun provideProviderDao(db: QuillDatabase): ProviderDao = db.providerDao()
