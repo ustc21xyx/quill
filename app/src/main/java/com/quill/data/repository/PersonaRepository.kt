@@ -46,7 +46,22 @@ class PersonaRepository @Inject constructor(
         dao.clearDefault()
     }
 
+    suspend fun ensureBuiltInPersona() {
+        if (dao.getById(BUILT_IN_ID) == null) {
+            dao.insert(
+                PersonaEntity(
+                    id = BUILT_IN_ID,
+                    name = "Default Assistant",
+                    description = "Built-in assistant",
+                    systemPrompt = "You are a helpful assistant.",
+                    isDefault = true,
+                )
+            )
+        }
+    }
+
     companion object {
+        const val BUILT_IN_ID = "built-in-default"
         fun newId(): String = UUID.randomUUID().toString()
     }
 }

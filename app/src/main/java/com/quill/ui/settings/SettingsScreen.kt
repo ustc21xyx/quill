@@ -187,34 +187,25 @@ fun SettingsScreen(
 
         Spacer(Modifier.height(16.dp))
 
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(
-                onClick = onAddPersona,
-                shape = ButtonShape,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    contentColor = MaterialTheme.colorScheme.onPrimary,
-                ),
-            ) {
-                Text(stringResource(R.string.settings_new_persona), style = MaterialTheme.typography.labelLarge)
-            }
-            if (personas.any { it.isDefault }) {
-                TextButton(
-                    onClick = { viewModel.clearDefaultPersona() },
-                    shape = ButtonShape,
-                ) {
-                    Text(stringResource(R.string.settings_clear_persona), style = MaterialTheme.typography.labelLarge)
-                }
-            }
+        Button(
+            onClick = onAddPersona,
+            shape = ButtonShape,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+            ),
+        ) {
+            Text(stringResource(R.string.settings_new_persona), style = MaterialTheme.typography.labelLarge)
         }
 
         Spacer(Modifier.height(16.dp))
 
         personas.forEach { persona ->
+            val isBuiltIn = persona.id == "built-in-default"
             PersonaItem(
                 persona = persona,
                 onEdit = { onEditPersona(persona.id) },
-                onDelete = { viewModel.deletePersona(persona.id) },
+                onDelete = if (isBuiltIn) null else {{ viewModel.deletePersona(persona.id) }},
                 onSetDefault = { viewModel.setDefaultPersona(persona.id) },
             )
             Spacer(Modifier.height(12.dp))
@@ -246,7 +237,7 @@ fun SettingsScreen(
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = stringResource(R.string.settings_version, "1.0.18"),
+            text = stringResource(R.string.settings_version, "1.0.19"),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.outline,
         )
@@ -257,7 +248,7 @@ fun SettingsScreen(
 private fun PersonaItem(
     persona: Persona,
     onEdit: () -> Unit,
-    onDelete: () -> Unit,
+    onDelete: (() -> Unit)?,
     onSetDefault: () -> Unit,
 ) {
     PaperSurface(modifier = Modifier.fillMaxWidth()) {
@@ -307,10 +298,12 @@ private fun PersonaItem(
                     }
                 }
                 TextButton(onClick = onEdit) {
-                    Text("EDIT", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
+                    Text(stringResource(R.string.prov_edit), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary)
                 }
-                TextButton(onClick = onDelete) {
-                    Text("DELETE", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                if (onDelete != null) {
+                    TextButton(onClick = onDelete) {
+                        Text(stringResource(R.string.prov_delete), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.error)
+                    }
                 }
             }
         }

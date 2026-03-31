@@ -28,6 +28,10 @@ class SettingsViewModel @Inject constructor(
 
     private val prefs = context.getSharedPreferences("quill_settings", Context.MODE_PRIVATE)
 
+    init {
+        viewModelScope.launch { personaRepository.ensureBuiltInPersona() }
+    }
+
     val defaultModelName: StateFlow<String?> = modelRepository.getDefault()
         .map { it?.displayName }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
