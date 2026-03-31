@@ -45,6 +45,7 @@
     <string name="prov_refresh">REFRESH MODELS</string>
     <string name="prov_edit">EDIT</string>
     <string name="prov_delete">DELETE</string>
+    <string name="prov_add_model">+ Add Model</string>
 
     <!-- Provider Edit -->
     <string name="prov_edit_add_title">Add Provider</string>

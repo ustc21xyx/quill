@@ -11,10 +11,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -27,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.res.stringResource
 import com.quill.R
+import com.quill.domain.model.ModelConfig
 import com.quill.domain.model.Provider
 import com.quill.ui.components.PaperSurface
 import com.quill.ui.theme.ButtonShape
@@ -35,11 +38,13 @@ import com.quill.ui.theme.ButtonShape
 fun ProviderListScreen(
     onAddProvider: () -> Unit,
     onEditProvider: (String) -> Unit,
-    onViewModels: () -> Unit = {},
+    onAddModel: (providerId: String) -> Unit,
+    onEditModel: (modelId: String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ProviderListViewModel = hiltViewModel(),
 ) {
     val providers by viewModel.providers.collectAsStateWithLifecycle()
+    val modelsPerProvider by viewModel.modelsPerProvider.collectAsStateWithLifecycle()
 
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -80,13 +85,6 @@ fun ProviderListScreen(
                             style = MaterialTheme.typography.labelLarge,
                         )
                     }
-                    TextButton(onClick = onViewModels) {
-                        Text(
-                            text = stringResource(R.string.prov_view_models),
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary,
-                        )
-                    }
                 }
             }
         }
@@ -117,9 +115,14 @@ fun ProviderListScreen(
         items(providers, key = { it.id }) { provider ->
             ProviderCard(
                 provider = provider,
+                models = modelsPerProvider[provider.id] ?: emptyList(),
                 onEdit = { onEditProvider(provider.id) },
                 onDelete = { viewModel.deleteProvider(provider.id) },
                 onRefresh = { viewModel.refreshModels(provider) },
+                onAddModel = { onAddModel(provider.id) },
+                onEditModel = onEditModel,
+                onSetDefault = { modelId -> viewModel.setDefault(modelId) },
+                onDeleteModel = { modelId -> viewModel.deleteModel(modelId) },
             )
         }
 
@@ -130,9 +133,14 @@ fun ProviderListScreen(
 @Composable
 private fun ProviderCard(
     provider: Provider,
+    models: List<ModelConfig>,
     onEdit: () -> Unit,
     onDelete: () -> Unit,
     onRefresh: () -> Unit,
+    onAddModel: () -> Unit,
+    onEditModel: (String) -> Unit,
+    onSetDefault: (String) -> Unit,
+    onDeleteModel: (String) -> Unit,
 ) {
     PaperSurface(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(24.dp)) {
@@ -166,7 +174,46 @@ private fun ProviderCard(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
+            // Models section
             Spacer(Modifier.height(16.dp))
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.15f))
+            Spacer(Modifier.height(12.dp))
+
+            Text(
+                text = stringResource(R.string.model_header),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.outline,
+            )
+            Spacer(Modifier.height(8.dp))
+
+            if (models.isEmpty()) {
+                Text(
+                    text = stringResource(R.string.model_empty_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                )
+                Spacer(Modifier.height(8.dp))
+            } else {
+                models.forEach { model ->
+                    ModelRow(
+                        model = model,
+                        onEdit = { onEditModel(model.id) },
+                        onSetDefault = { onSetDefault(model.id) },
+                        onDelete = { onDeleteModel(model.id) },
+                    )
+                    Spacer(Modifier.height(4.dp))
+                }
+            }
+
+            TextButton(onClick = onAddModel) {
+                Text(
+                    text = stringResource(R.string.prov_add_model),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
+
+            Spacer(Modifier.height(8.dp))
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.15f))
             Spacer(Modifier.height(8.dp))
 
@@ -196,6 +243,70 @@ private fun ProviderCard(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun ModelRow(
+    model: ModelConfig,
+    onEdit: () -> Unit,
+    onSetDefault: () -> Unit,
+    onDelete: () -> Unit,
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Column(modifier = Modifier.weight(1f)) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Text(
+                    text = model.displayName,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                if (model.isDefault) {
+                    Surface(
+                        color = MaterialTheme.colorScheme.surfaceContainerHighest,
+                        shape = RoundedCornerShape(50),
+                    ) {
+                        Text(
+                            text = stringResource(R.string.model_default),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
+                        )
+                    }
+                }
+            }
+            Text(
+                text = model.modelId,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.outlineVariant,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        }
+        if (!model.isDefault) {
+            TextButton(onClick = onSetDefault) {
+                Text(
+                    stringResource(R.string.model_set_default),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.tertiary,
+                )
+            }
+        }
+        TextButton(onClick = onDelete) {
+            Text(
+                stringResource(R.string.model_delete),
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.error,
+            )
         }
     }
 }

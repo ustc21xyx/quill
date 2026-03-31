@@ -34,7 +34,6 @@ import com.quill.ui.components.ConversationDrawer
 import com.quill.ui.components.QuillBottomBar
 import com.quill.ui.components.QuillTopBar
 import com.quill.ui.models.ModelEditScreen
-import com.quill.ui.models.ModelRegistryScreen
 import com.quill.ui.personas.PersonaEditScreen
 import com.quill.ui.providers.ProviderEditScreen
 import com.quill.ui.providers.ProviderListScreen
@@ -54,6 +53,7 @@ object Routes {
     fun chat(conversationId: String) = "chat/$conversationId"
     fun providerEdit(providerId: String) = "providers/edit/$providerId"
     fun modelEdit(modelId: String) = "models/edit/$modelId"
+    fun modelEditWithProvider(providerId: String) = "models/edit/new?providerId=$providerId"
     fun personaEdit(personaId: String) = "personas/edit/$personaId"
 }
 
@@ -76,10 +76,10 @@ fun QuillNavigation() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
-    val topLevelRoutes = listOf(Routes.CHAT_NEW, Routes.PROVIDERS, Routes.MODELS, Routes.SETTINGS)
+    val topLevelRoutes = listOf(Routes.CHAT_NEW, Routes.PROVIDERS, Routes.SETTINGS)
     val isChatRoute = currentRoute == Routes.CHAT_NEW || currentRoute == Routes.CHAT
     val showBottomBar = currentRoute in topLevelRoutes || currentRoute == Routes.CHAT
-    val showTopBar = currentRoute in listOf(Routes.PROVIDERS, Routes.MODELS, Routes.SETTINGS)
+    val showTopBar = currentRoute in listOf(Routes.PROVIDERS, Routes.SETTINGS)
 
     ModalNavigationDrawer(
         drawerState = drawerState,
@@ -165,8 +165,11 @@ fun QuillNavigation() {
                         onEditProvider = { id ->
                             navController.navigate(Routes.providerEdit(id))
                         },
-                        onViewModels = {
-                            navController.navigate(Routes.MODELS)
+                        onAddModel = { providerId ->
+                            navController.navigate(Routes.modelEditWithProvider(providerId))
+                        },
+                        onEditModel = { modelId ->
+                            navController.navigate(Routes.modelEdit(modelId))
                         },
                     )
                 }
@@ -176,19 +179,16 @@ fun QuillNavigation() {
                 ) {
                     ProviderEditScreen(onBack = { navController.popBackStack() })
                 }
-                composable(Routes.MODELS) {
-                    ModelRegistryScreen(
-                        onEditModel = { id ->
-                            navController.navigate(Routes.modelEdit(id))
-                        },
-                        onAddModel = {
-                            navController.navigate(Routes.modelEdit("new"))
-                        },
-                    )
-                }
                 composable(
-                    route = Routes.MODEL_EDIT,
-                    arguments = listOf(navArgument("modelId") { type = NavType.StringType }),
+                    route = "${Routes.MODEL_EDIT}?providerId={providerId}",
+                    arguments = listOf(
+                        navArgument("modelId") { type = NavType.StringType },
+                        navArgument("providerId") {
+                            type = NavType.StringType
+                            nullable = true
+                            defaultValue = null
+                        },
+                    ),
                 ) {
                     ModelEditScreen(onBack = { navController.popBackStack() })
                 }

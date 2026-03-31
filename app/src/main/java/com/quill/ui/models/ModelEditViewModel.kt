@@ -40,11 +40,16 @@ class ModelEditViewModel @Inject constructor(
 
     private val modelIdArg: String = savedStateHandle["modelId"] ?: "new"
     private val existingId: String? = if (modelIdArg == "new") null else modelIdArg
+    private val preselectedProviderId: String? = savedStateHandle["providerId"]
 
     private val _state = MutableStateFlow(ModelEditUiState())
     val state: StateFlow<ModelEditUiState> = _state.asStateFlow()
 
     init {
+        // If a providerId was passed via navigation, pre-select it
+        if (preselectedProviderId != null) {
+            _state.update { it.copy(providerId = preselectedProviderId) }
+        }
         loadProviders()
         if (existingId != null) {
             viewModelScope.launch {
@@ -68,11 +73,14 @@ class ModelEditViewModel @Inject constructor(
         viewModelScope.launch {
             providerRepository.getAll().collect { providers ->
                 _state.update { state ->
+                    val resolvedProviderId = when {
+                        state.providerId.isNotEmpty() -> state.providerId
+                        preselectedProviderId != null -> preselectedProviderId
+                        else -> providers.firstOrNull()?.id ?: ""
+                    }
                     state.copy(
                         providers = providers,
-                        providerId = state.providerId.ifEmpty {
-                            providers.firstOrNull()?.id ?: ""
-                        },
+                        providerId = resolvedProviderId,
                     )
                 }
             }
