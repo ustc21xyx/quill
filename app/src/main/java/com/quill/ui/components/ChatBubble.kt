@@ -88,16 +88,12 @@ fun AiBubble(
                     Spacer(Modifier.height(12.dp))
                 }
 
-                // Content
+                // Content — always use StreamAiText for consistent rendering
                 if (message.content.isNotEmpty() || message.isStreaming) {
-                    if (message.isStreaming) {
-                        StreamAiText(
-                            text = message.content,
-                            animate = true,
-                        )
-                    } else {
-                        MarkdownText(content = message.content)
-                    }
+                    StreamAiText(
+                        text = message.content,
+                        animate = message.isStreaming,
+                    )
                 }
 
                 // Actions (only when not streaming)
